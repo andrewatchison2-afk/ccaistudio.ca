@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital City AI Studio — Sample Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ed;
+    --cream: #f0ebe3;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --red: #d63c2f;
+    --mid: #1e1e1e;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--black);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+
+  .logo span { color: var(--white); }
+
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.8rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 6rem 3rem 4rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: 'SAMPLE';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10rem;
+    color: rgba(201,168,76,0.04);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(245,242,237,0.6);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .hero-sub strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* REALTOR CARD */
+  .realtor-card {
+    margin: 3rem;
+    padding: 2rem 2.5rem;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+  }
+
+  .realtor-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--gold);
+  }
+
+  .realtor-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, #8a6520 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+
+  .realtor-info {}
+  .realtor-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+  .realtor-info p {
+    font-size: 0.8rem;
+    color: rgba(245,242,237,0.5);
+    letter-spacing: 0.05em;
+  }
+  .realtor-info p strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .fictional-badge {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 0.3rem 0.6rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* NAV TABS */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    overflow-x: auto;
+    gap: 0;
+  }
+
+  .tab {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1.2rem 1.8rem;
+    cursor: pointer;
+    color: rgba(245,242,237,0.4);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .tab:hover { color: var(--white); }
+  .tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* CONTENT PANELS */
+  .panel { display: none; padding: 3rem; animation: fadeIn 0.3s ease; }
+  .panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* SOCIAL POSTS */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .post-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .post-header {
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, #8a6520 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--black);
+  }
+
+  .post-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .post-handle {
+    font-size: 0.72rem;
+    color: rgba(245,242,237,0.4);
+  }
+
+  .post-platform {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-image.market { background: linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 100%); color: #4caf50; }
+  .post-image.listing { background: linear-gradient(135deg, #1a1a2a 0%, #0d0d1a 100%); color: #6c8ebf; }
+  .post-image.tip { background: linear-gradient(135deg, #2a1a0d 0%, #1a0d00 100%); color: var(--gold); }
+  .post-image.community { background: linear-gradient(135deg, #2a0d1a 0%, #1a0008 100%); color: #e06090; }
+  .post-image.sold { background: linear-gradient(135deg, #1a0a0a 0%, #2a0000 100%); color: var(--red); }
+
+  .post-image-sub {
+    position: absolute;
+    bottom: 0.8rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+    text-transform: uppercase;
+  }
+
+  .post-body {
+    padding: 1.2rem;
+  }
+
+  .post-caption {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(245,242,237,0.85);
+    margin-bottom: 1rem;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  .post-footer {
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .post-stat {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(245,242,237,0.35);
+  }
+
+  /* NEWSLETTER */
+  .newsletter-wrapper {
+    max-width: 680px;
+  }
+
+  .email-chrome {
+    background: #1a1a1a;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .email-toolbar {
+    background: #222;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
+
+  .email-meta {
+    padding: 1.2rem 2rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: rgba(245,242,237,0.45);
+    line-height: 1.8;
+  }
+  .email-meta strong { color: var(--white); font-weight: 500; }
+
+  .email-body {
+    padding: 2.5rem 2rem;
+  }
+
+  .email-header-block {
+    background: var(--black);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--gold);
+  }
+
+  .email-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .email-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .email-subhead {
+    font-size: 0.85rem;
+    color: rgba(245,242,237,0.55);
+    font-weight: 300;
+  }
+
+  .email-p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(245,242,237,0.8);
+    margin-bottom: 1.5rem;
+  }
+
+  .email-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .email-stat {
+    background: var(--black);
+    padding: 1.2rem;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .email-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .email-stat-label {
+    font-size: 0.72rem;
+    color: rgba(245,242,237,0.45);
+    line-height: 1.3;
+  }
+
+  .email-cta {
+    background: var(--gold);
+    color: var(--black);
+    padding: 1rem 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    margin: 1.5rem 0;
+    cursor: pointer;
+  }
+
+  .email-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2rem 0;
+  }
+
+  .email-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .email-listing-row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .email-listing-img {
+    width: 80px;
+    height: 60px;
+    background: linear-gradient(135deg, #1a1a2a, #0d0d1a);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .email-listing-detail h4 {
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  .email-listing-detail p {
+    font-size: 0.78rem;
+    color: rgba(245,242,237,0.5);
+    line-height: 1.5;
+  }
+
+  .email-listing-detail .price {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .email-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem;
+    color: rgba(245,242,237,0.3);
+    line-height: 1.8;
+  }
+
+  /* LISTING */
+  .listing-wrapper {
+    max-width: 720px;
+  }
+
+  .listing-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .listing-address {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .listing-location {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,242,237,0.45);
+    text-transform: uppercase;
+  }
+
+  .listing-price-block {
+    text-align: right;
+  }
+
+  .listing-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .listing-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: #4caf50;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .listing-specs {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .listing-spec {
+    text-align: center;
+  }
+
+  .listing-spec-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    line-height: 1;
+    display: block;
+  }
+
+  .listing-spec-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(245,242,237,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .listing-photo-placeholder {
+    width: 100%;
+    height: 240px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .listing-photo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.015) 20px, rgba(255,255,255,0.015) 40px);
+  }
+
+  .listing-photo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.15);
+    text-transform: uppercase;
+  }
+
+  .listing-tag-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .listing-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    color: rgba(245,242,237,0.55);
+    text-transform: uppercase;
+  }
+
+  .listing-body {
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: rgba(245,242,237,0.8);
+  }
+
+  .listing-body p { margin-bottom: 1.2rem; }
+
+  .listing-body strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* FOLLOW-UP */
+  .sequence-wrapper {
+    max-width: 680px;
+  }
+
+  .sequence-timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .sequence-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .sequence-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .sequence-dot {
+    position: absolute;
+    left: -2.35rem;
+    top: 0.2rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--black);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+
+  .sequence-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .sequence-day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+  }
+
+  .sequence-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,242,237,0.4);
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+  }
+
+  .sequence-email {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .sequence-email-subject {
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .subject-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(245,242,237,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+
+  .sequence-email-body {
+    padding: 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: rgba(245,242,237,0.75);
+  }
+
+  .sequence-email-body p { margin-bottom: 0.8rem; }
+  .sequence-email-body p:last-child { margin-bottom: 0; }
+
+  .sequence-email-body .sig {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: rgba(245,242,237,0.45);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .footer-note {
+    font-size: 0.75rem;
+    color: rgba(245,242,237,0.25);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Capital City <span>AI Studio</span></div>
+  <div class="header-tag">Sample Work · Edmonton Realtors</div>
+</header>
+
+<section class="hero">
+  <div class="hero-label">// Content Portfolio Demo</div>
+  <h1>This Is What<br><em>Your Agents</em><br>Could Have.</h1>
+  <p class="hero-sub">Every post, email, listing description, and follow-up sequence below was produced by Capital City AI Studio. <strong>Done-for-you. Delivered monthly.</strong> Your agents focus on deals — we handle the content.</p>
+</section>
+
+<div class="realtor-card">
+  <div class="realtor-avatar">JS</div>
+  <div class="realtor-info">
+    <h3>Jordan Sloane</h3>
+    <p>REALTOR® · <strong>Serving Glenora, Oliver & West Edmonton</strong> · 7 years in the market</p>
+  </div>
+  <div class="fictional-badge">Fictional Client</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPanel('social', this)">Social Posts</button>
+  <button class="tab" onclick="showPanel('newsletter', this)">Email Newsletter</button>
+  <button class="tab" onclick="showPanel('listing', this)">Listing Description</button>
+  <button class="tab" onclick="showPanel('followup', this)">Follow-Up Sequence</button>
+</div>
+
+<!-- SOCIAL POSTS -->
+<div id="social" class="panel active">
+  <div class="section-label">05 Social Media Posts · March Batch</div>
+  <div class="posts-grid">
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar">JS</div>
+        <div>
+          <div class="post-name">Jordan Sloane</div>
+          <div class="post-handle">@jordansloaneyeg</div>
+        </div>
+        <div class="post-platform">Instagram</div>
+      </div>
+      <div class="post-image market">
+        📊
+        <div class="post-image-sub">Edmonton Market Update</div>
+      </div>
+      <div class="post-body">
+        <div class="post-caption">Edmonton's market is moving — and if you've been waiting on the sidelines, this is your read.<br><br>February saw 1,847 residential sales across the city. Detached homes averaged 18 days on market. Inventory is still tight in the $450K–$650K range.<br><br>What does this mean if you're buying this spring? Drop a 🏠 below and I'll send you my full March market breakdown — no strings attached.</div>
+        <div class="post-tags">
+          <span class="tag">#yegre</span>
+          <span class="tag">#edmontonrealestate</span>
+          <span class="tag">#yegmarket</span>
+          <span class="tag">#edmontonhomes</span>
+        </div>
+      </div>
+      <div class="post-footer">
+        <span class="post-stat">❤️ Est. 84 likes</span>
+        <span class="post-stat">💬 12 comments</span>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar">JS</div>
+        <div>
+          <div class="post-name">Jordan Sloane</div>
+          <div class="post-handle">@jordansloaneyeg</div>
+        </div>
+        <div class="post-platform">Facebook</div>
+      </div>
+      <div class="post-image listing">
+        🏡
+        <div class="post-image-sub">New Listing · Glenora</div>
+      </div>
+      <div class="post-body">
+        <div class="post-caption">Just listed in Glenora — and it won't last long.<br><br>This 3-bed, 2-bath character home sits on a tree-lined street two blocks from the river valley. Original hardwood, updated kitchen, double garage. The kind of place that actually makes you slow down when you pull up out front.<br><br>📍 12207 Stony Plain Rd · $679,900<br>🗓 Open House: Saturday 1–4pm<br><br>DM me or tag someone who's been watching Glenora.</div>
+        <div class="post-tags">
+          <span class="tag">#glenora</span>
+          <span class="tag">#yeglistings</span>
+          <span class="tag">#edmontonhomes</span>
+        </div>
+      </div>
+      <div class="post-footer">
+        <span class="post-stat">❤️ Est. 127 likes</span>
+        <span class="post-stat">💬 23 comments</span>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar">JS</div>
+        <div>
+          <div class="post-name">Jordan Sloane</div>
+          <div class="post-handle">@jordansloaneyeg</div>
+        </div>
+        <div class="post-platform">Instagram</div>
+      </div>
+      <div class="post-image tip">
+        💡
+        <div class="post-image-sub">Buyer Tip</div>
+      </div>
+      <div class="post-body">
+        <div class="post-caption">The #1 mistake I see first-time buyers make in Edmonton right now:<br><br>Getting pre-approved for what the bank will give them — not what they're actually comfortable spending.<br><br>A lender will approve you for $600K. That doesn't mean a $600K mortgage payment fits your life. Talk to your broker about what the monthly looks like with utilities, condo fees, and an emergency fund in the picture.<br><br>Save this post. You'll thank yourself in year two.</div>
+        <div class="post-tags">
+          <span class="tag">#firsttimebuyer</span>
+          <span class="tag">#yegbuyer</span>
+          <span class="tag">#edmontonrealtor</span>
+        </div>
+      </div>
+      <div class="post-footer">
+        <span class="post-stat">❤️ Est. 203 likes</span>
+        <span class="post-stat">💬 31 comments</span>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar">JS</div>
+        <div>
+          <div class="post-name">Jordan Sloane</div>
+          <div class="post-handle">@jordansloaneyeg</div>
+        </div>
+        <div class="post-platform">Instagram</div>
+      </div>
+      <div class="post-image community">
+        📍
+        <div class="post-image-sub">Neighbourhood Spotlight</div>
+      </div>
+      <div class="post-body">
+        <div class="post-caption">Neighbourhood spotlight: Oliver 🏙<br><br>Oliver is one of Edmonton's most walkable neighbourhoods — and it's still flying under the radar compared to what buyers are getting in comparable Calgary districts.<br><br>Coffee, groceries, river valley trails, and the LRT all within 10 minutes on foot. Condos starting in the high $200s, character infills well into the $700s.<br><br>If you've been sleeping on Oliver, I'd love to show you around. DM "OLIVER" and I'll send you a curated list of what's currently on the market.</div>
+        <div class="post-tags">
+          <span class="tag">#oliver</span>
+          <span class="tag">#yeg</span>
+          <span class="tag">#edmontonliving</span>
+        </div>
+      </div>
+      <div class="post-footer">
+        <span class="post-stat">❤️ Est. 156 likes</span>
+        <span class="post-stat">💬 19 comments</span>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar">JS</div>
+        <div>
+          <div class="post-name">Jordan Sloane</div>
+          <div class="post-handle">@jordansloaneyeg</div>
+        </div>
+        <div class="post-platform">Facebook</div>
+      </div>
+      <div class="post-image sold">
+        🔑
+        <div class="post-image-sub">Just Sold</div>
+      </div>
+      <div class="post-body">
+        <div class="post-caption">SOLD — 6 days on market. 101% of asking price. 🔑<br><br>When my clients bought this West Oliver condo in 2021, they weren't sure if they were making the right call. Three years later, they walked away with $67,000 in equity and a plan for their next chapter.<br><br>That's what thoughtful real estate decisions look like over time.<br><br>Thinking about what your home is worth today? I run free, no-pressure valuations every week. Drop your postal code in the comments.</div>
+        <div class="post-tags">
+          <span class="tag">#justsold</span>
+          <span class="tag">#yegre</span>
+          <span class="tag">#edmontonrealtor</span>
+        </div>
+      </div>
+      <div class="post-footer">
+        <span class="post-stat">❤️ Est. 241 likes</span>
+        <span class="post-stat">💬 44 comments</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="panel">
+  <div class="section-label">Email Newsletter · March Edition</div>
+  <div class="newsletter-wrapper">
+    <div class="email-chrome">
+      <div class="email-toolbar">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+      </div>
+      <div class="email-meta">
+        <strong>From:</strong> Jordan Sloane · Jordan@jordansloaneyeg.ca<br>
+        <strong>Subject:</strong> Edmonton's Spring Market Is Already Here (What You Need to Know)<br>
+        <strong>To:</strong> Your Database · 847 contacts
+      </div>
+      <div class="email-body">
+        <div class="email-header-block">
+          <div class="email-eyebrow">// March 2026 · Market Update</div>
+          <div class="email-headline">Spring Didn't<br>Wait for March.</div>
+          <div class="email-subhead">Edmonton's market shifted earlier than expected. Here's what it means for you.</div>
+        </div>
+
+        <p class="email-p">Hi [First Name],</p>
+
+        <p class="email-p">Every year I tell buyers: "Spring market starts in March." This year I was wrong — it started in February. Sales are up, inventory is still tight, and the window for making a move before prices climb further is open right now, but it won't be for long.</p>
+
+        <p class="email-p">Here's a quick snapshot of where things stand across Edmonton:</p>
+
+        <div class="email-stat-row">
+          <div class="email-stat">
+            <span class="email-stat-num">18</span>
+            <div class="email-stat-label">Avg. days on market (detached)</div>
+          </div>
+          <div class="email-stat">
+            <span class="email-stat-num">↑8%</span>
+            <div class="email-stat-label">Year-over-year price increase</div>
+          </div>
+          <div class="email-stat">
+            <span class="email-stat-num">99.2%</span>
+            <div class="email-stat-label">Sale-to-list ratio this month</div>
+          </div>
+        </div>
+
+        <p class="email-p">The $450K–$650K detached segment is the most competitive right now. If that's your range, you need to be pre-approved, decisive, and working with someone who can move fast. That's exactly what I'm here for.</p>
+
+        <div class="email-divider"></div>
+
+        <div class="email-section-title">What's New on My List</div>
+
+        <div class="email-listing-row">
+          <div class="email-listing-img">🏠</div>
+          <div class="email-listing-detail">
+            <h4>12207 Stony Plain Rd NW · Glenora</h4>
+            <p>3 bed · 2 bath · 1,640 sq ft · Double garage · Character home<br>
+            <span class="price">$679,900 · Active</span></p>
+          </div>
+        </div>
+
+        <div class="email-listing-row">
+          <div class="email-listing-img">🏢</div>
+          <div class="email-listing-detail">
+            <h4>1204–10180 103 St NW · Oliver</h4>
+            <p>2 bed · 2 bath · 987 sq ft · City views · Underground parking<br>
+            <span class="price">$389,900 · Active</span></p>
+          </div>
+        </div>
+
+        <div class="email-divider"></div>
+
+        <p class="email-p">If you're thinking about selling this spring, the best time to start the conversation is now — before you're competing with every other listing that hits in April. I offer free, no-obligation home valuations every week and I'll tell you the truth about what your home is worth, not just what you want to hear.</p>
+
+        <div class="email-cta">→ Book a Free Home Valuation</div>
+
+        <div class="email-divider"></div>
+
+        <p class="email-p">As always, reply directly to this email with any questions. I read every one.</p>
+
+        <p class="email-p">Talk soon,<br><strong>Jordan</strong></p>
+
+      </div>
+      <div class="email-footer">
+        Jordan Sloane · REALTOR® · Serving Glenora, Oliver & West Edmonton<br>
+        Century 21 Masters · 10555 172 St NW, Edmonton AB<br><br>
+        You're receiving this because you're part of Jordan's community. <u>Unsubscribe</u> · <u>Update preferences</u>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LISTING DESCRIPTION -->
+<div id="listing" class="panel">
+  <div class="section-label">MLS Listing Description · Glenora Property</div>
+  <div class="listing-wrapper">
+
+    <div class="listing-top">
+      <div>
+        <div class="listing-address">12207 Stony Plain Rd NW</div>
+        <div class="listing-location">Glenora · Edmonton, AB · T5N 3N6</div>
+      </div>
+      <div class="listing-price-block">
+        <div class="listing-price">$679,900</div>
+        <div class="listing-status">● Active</div>
+      </div>
+    </div>
+
+    <div class="listing-specs">
+      <div class="listing-spec">
+        <span class="listing-spec-num">3</span>
+        <span class="listing-spec-label">Bedrooms</span>
+      </div>
+      <div class="listing-spec">
+        <span class="listing-spec-num">2</span>
+        <span class="listing-spec-label">Bathrooms</span>
+      </div>
+      <div class="listing-spec">
+        <span class="listing-spec-num">1,640</span>
+        <span class="listing-spec-label">Sq Ft</span>
+      </div>
+      <div class="listing-spec">
+        <span class="listing-spec-num">2</span>
+        <span class="listing-spec-label">Car Garage</span>
+      </div>
+      <div class="listing-spec">
+        <span class="listing-spec-num">1962</span>
+        <span class="listing-spec-label">Year Built</span>
+      </div>
+    </div>
+
+    <div class="listing-photo-placeholder">
+      <div class="listing-photo-text">Property Photos</div>
+    </div>
+
+    <div class="listing-tag-row">
+      <span class="listing-tag">Character Home</span>
+      <span class="listing-tag">Original Hardwood</span>
+      <span class="listing-tag">Updated Kitchen</span>
+      <span class="listing-tag">River Valley Access</span>
+      <span class="listing-tag">Double Garage</span>
+      <span class="listing-tag">Tree-Lined Street</span>
+    </div>
+
+    <div class="listing-body">
+      <p>Some homes sell a neighbourhood. This one <strong>is</strong> the neighbourhood.</p>
+
+      <p>Set on one of Glenora's most coveted tree-lined streets — two blocks from the river valley trail system and a short walk to the boutique restaurants and cafés along 142 Street — this 1962 character home has been thoughtfully updated while preserving every detail that makes older Edmonton homes worth seeking out.</p>
+
+      <p>The main floor opens into generous living and dining spaces anchored by original hardwood floors refinished to a rich, deep tone. The updated kitchen features quartz countertops, stainless appliances, and a layout that actually works for the way people cook — with a direct sightline to the backyard so nothing happens without you noticing.</p>
+
+      <p><strong>Three bedrooms upstairs</strong> including a primary with a large closet and views of the backyard canopy. A second full bathroom on the upper level has been renovated without losing its character. The basement is developed with a flex room that works as a home office, gym, or guest space depending on your life stage.</p>
+
+      <p>Out back: a private yard, mature trees, and a detached double garage accessed from the rear lane — the kind of setup that gets harder to find and easier to appreciate every year you own it.</p>
+
+      <p>Glenora remains one of Edmonton's most stable and sought-after inner-city communities, with proximity to downtown, excellent schools, and the river valley making it genuinely irreplaceable. Properties at this price point in this neighbourhood move quickly. <strong>Open house Saturday 1–4pm.</strong></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOLLOW-UP SEQUENCE -->
+<div id="followup" class="panel">
+  <div class="section-label">Lead Follow-Up Sequence · Open House Lead · 5 Touchpoints</div>
+  <div class="sequence-wrapper">
+    <div class="sequence-timeline">
+
+      <div class="sequence-item">
+        <div class="sequence-dot"></div>
+        <div class="sequence-meta">
+          <div class="sequence-day">Day 1</div>
+          <div class="sequence-type">Email · Immediate Follow-Up</div>
+        </div>
+        <div class="sequence-email">
+          <div class="sequence-email-subject">
+            <span class="subject-label">Subject</span>
+            Great meeting you at 12207 Stony Plain — a few things I forgot to mention
+          </div>
+          <div class="sequence-email-body">
+            <p>Hi [First Name],</p>
+            <p>It was great meeting you at the open house today. A few things I didn't get to cover in person that I think would be useful for you:</p>
+            <p>The schools in this pocket of Glenora are among the highest-rated in the city — Westmount and Glenora School both feed from this address, which matters a lot for resale even if it's not relevant to you personally right now.</p>
+            <p>Also, the double garage is rarer than it looks in this price range on the inner west side. Most comparable homes are single or tandem.</p>
+            <p>I've attached a PDF with the full property details and a quick neighbourhood market overview. If anything catches your eye or you have questions, just hit reply — I'm fast.</p>
+            <div class="sig">Jordan Sloane · REALTOR® · (780) 555-0182 · jordan@jordansloaneyeg.ca</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sequence-item">
+        <div class="sequence-dot"></div>
+        <div class="sequence-meta">
+          <div class="sequence-day">Day 3</div>
+          <div class="sequence-type">Email · Value Add</div>
+        </div>
+        <div class="sequence-email">
+          <div class="sequence-email-subject">
+            <span class="subject-label">Subject</span>
+            3 other Glenora properties you might not have seen yet
+          </div>
+          <div class="sequence-email-body">
+            <p>Hi [First Name],</p>
+            <p>Based on what you mentioned you were looking for, I pulled three other properties in Glenora and the surrounding streets that I think are worth a look. None of them are as turnkey as the Stony Plain Rd home, but they're priced accordingly and could be interesting depending on how you feel about a project.</p>
+            <p>I can arrange private showings for any of these this week if you want to compare in person — sometimes it helps to see a few side by side. No pressure either way.</p>
+            <p>Reply here or text me directly if you want to set something up.</p>
+            <div class="sig">Jordan Sloane · REALTOR® · (780) 555-0182 · jordan@jordansloaneyeg.ca</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sequence-item">
+        <div class="sequence-dot"></div>
+        <div class="sequence-meta">
+          <div class="sequence-day">Day 7</div>
+          <div class="sequence-type">Email · Urgency / Update</div>
+        </div>
+        <div class="sequence-email">
+          <div class="sequence-email-subject">
+            <span class="subject-label">Subject</span>
+            Quick update on 12207 Stony Plain
+          </div>
+          <div class="sequence-email-body">
+            <p>Hi [First Name],</p>
+            <p>Wanted to give you a heads-up: there's been a solid amount of activity on the Stony Plain Rd listing since the open house. We've had two private showings booked this week and I expect an offer conversation to happen in the next few days.</p>
+            <p>I don't say this to pressure you — I say it because I'd rather you have the information than not. If you're still thinking about it, now is probably the right time to have that conversation. If it's not the right fit, no problem — I'll keep watching for you.</p>
+            <p>Where are you at with it?</p>
+            <div class="sig">Jordan Sloane · REALTOR® · (780) 555-0182 · jordan@jordansloaneyeg.ca</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sequence-item">
+        <div class="sequence-dot"></div>
+        <div class="sequence-meta">
+          <div class="sequence-day">Day 14</div>
+          <div class="sequence-type">Email · Long-Term Nurture</div>
+        </div>
+        <div class="sequence-email">
+          <div class="sequence-email-subject">
+            <span class="subject-label">Subject</span>
+            Still in your corner — Edmonton market update
+          </div>
+          <div class="sequence-email-body">
+            <p>Hi [First Name],</p>
+            <p>Whether or not the Glenora property worked out, I wanted to send along a quick snapshot of what's happening in the Edmonton market this month — because the picture is shifting and it affects what you should be watching for.</p>
+            <p>The short version: inventory in the inner west is still low, days on market are shortening, and anything well-priced under $700K with a garage is moving fast. If you're still in the market, being pre-approved and ready to move quickly is the most important advantage you can have right now.</p>
+            <p>I'm here when you're ready. No rush, no pressure — just want to make sure you have the full picture.</p>
+            <div class="sig">Jordan Sloane · REALTOR® · (780) 555-0182 · jordan@jordansloaneyeg.ca</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sequence-item">
+        <div class="sequence-dot"></div>
+        <div class="sequence-meta">
+          <div class="sequence-day">Day 30</div>
+          <div class="sequence-type">Email · Re-Engagement</div>
+        </div>
+        <div class="sequence-email">
+          <div class="sequence-email-subject">
+            <span class="subject-label">Subject</span>
+            Checking in — still looking, or life got busy?
+          </div>
+          <div class="sequence-email-body">
+            <p>Hi [First Name],</p>
+            <p>It's been about a month since we met at the open house. I know life gets busy and timelines shift — I just wanted to check in without any agenda.</p>
+            <p>If you're still actively looking, I'd love to reconnect and make sure I'm sending you the right properties. If the timing has changed, that's completely fine — I'll move you to my monthly market update list so you stay informed without the follow-ups.</p>
+            <p>Just hit reply and let me know which camp you're in. Either way, no hard feelings.</p>
+            <div class="sig">Jordan Sloane · REALTOR® · (780) 555-0182 · jordan@jordansloaneyeg.ca</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-cta">Capital City AI Studio · Edmonton Realtor Content · capitalcityaistudio.com</div>
+  <div class="footer-note">// All content fictional · For demo purposes only</div>
+</footer>
+
+<script>
+  function showPanel(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
