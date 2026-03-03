@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capital City AI Studio — ccaistudio.ca</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -22,6 +23,17 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vq0uz4mh7n");
+</script>
+<!-- End Microsoft Clarity -->
+
 <style>
   :root {
     --navy: #0a1628;
@@ -39,7 +51,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -50,7 +61,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     cursor: default;
   }
 
-  /* NOISE TEXTURE */
   body::before {
     content: '';
     position: fixed;
@@ -61,7 +71,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     opacity: 0.4;
   }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -98,12 +107,8 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     transition: all 0.2s ease;
   }
 
-  .nav-cta:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -132,11 +137,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 760px;
-  }
+  .hero-content { position: relative; z-index: 2; max-width: 760px; }
 
   .hero-badge {
     display: inline-flex;
@@ -178,11 +179,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     animation: fadeUp 0.8s 0.35s ease both;
   }
 
-  h1 em {
-    font-style: normal;
-    color: var(--gold);
-    position: relative;
-  }
+  h1 em { font-style: normal; color: var(--gold); }
 
   .hero-sub {
     font-size: 1.18rem;
@@ -283,7 +280,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     text-transform: uppercase;
   }
 
-  /* SECTION STYLES */
   section { padding: 100px 60px; position: relative; }
 
   .section-label {
@@ -311,7 +307,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     font-weight: 300;
   }
 
-  /* PROBLEM SECTION */
   .problem {
     background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
     border-top: 1px solid var(--card-border);
@@ -326,13 +321,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     margin: 0 auto;
   }
 
-  .pain-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 40px;
-  }
+  .pain-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
 
   .pain-list li {
     display: flex;
@@ -343,14 +332,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     line-height: 1.6;
   }
 
-  .pain-list li::before {
-    content: '✗';
-    color: #ef4444;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
+  .pain-list li::before { content: '✗'; color: #ef4444; font-weight: 700; font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
 
   .solution-card {
     background: var(--card-bg);
@@ -369,20 +351,9 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     background: linear-gradient(90deg, var(--gold), var(--blue-light));
   }
 
-  .solution-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: var(--white);
-  }
+  .solution-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 24px; color: var(--white); }
 
-  .solution-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
+  .solution-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
 
   .solution-list li {
     display: flex;
@@ -393,26 +364,11 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     line-height: 1.6;
   }
 
-  .solution-list li::before {
-    content: '✓';
-    color: var(--gold);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .solution-list li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
 
-  /* HOW IT WORKS */
   .how { background: var(--navy); }
-
-  .how-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .how-header {
-    text-align: center;
-    margin-bottom: 70px;
-  }
+  .how-inner { max-width: 1100px; margin: 0 auto; }
+  .how-header { text-align: center; margin-bottom: 70px; }
 
   .steps {
     display: grid;
@@ -439,14 +395,9 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     border: 1px solid var(--card-border);
     border-radius: 12px;
     transition: all 0.3s ease;
-    position: relative;
   }
 
-  .step:hover {
-    border-color: rgba(201,168,76,0.4);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-  }
+  .step:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
 
   .step-num {
     width: 52px; height: 52px;
@@ -462,26 +413,10 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     margin: 0 auto 20px;
   }
 
-  .step h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--white);
-  }
+  .step h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+  .step p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
 
-  .step p {
-    font-size: 0.875rem;
-    color: var(--gray);
-    line-height: 1.6;
-  }
-
-  /* WHAT YOU GET */
-  .deliverables {
-    background: var(--navy2);
-    border-top: 1px solid var(--card-border);
-    border-bottom: 1px solid var(--card-border);
-  }
+  .deliverables { background: var(--navy2); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
 
   .deliverables-inner {
     max-width: 1100px;
@@ -492,11 +427,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     align-items: start;
   }
 
-  .deliverable-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+  .deliverable-cards { display: flex; flex-direction: column; gap: 16px; }
 
   .d-card {
     background: var(--card-bg);
@@ -509,10 +440,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     transition: all 0.25s ease;
   }
 
-  .d-card:hover {
-    border-color: rgba(201,168,76,0.3);
-    background: #151f35;
-  }
+  .d-card:hover { border-color: rgba(201,168,76,0.3); background: #151f35; }
 
   .d-icon {
     font-size: 1.5rem;
@@ -525,38 +453,14 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     flex-shrink: 0;
   }
 
-  .d-text h4 {
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-    color: var(--white);
-  }
+  .d-text h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; color: var(--white); }
+  .d-text p { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
 
-  .d-text p {
-    font-size: 0.82rem;
-    color: var(--gray);
-    line-height: 1.5;
-  }
-
-  /* PRICING */
   .pricing { background: var(--navy); }
+  .pricing-inner { max-width: 1000px; margin: 0 auto; }
+  .pricing-header { text-align: center; margin-bottom: 60px; }
 
-  .pricing-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .pricing-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    align-items: start;
-  }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
 
   .price-card {
     background: var(--card-bg);
@@ -567,10 +471,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     transition: all 0.3s ease;
   }
 
-  .price-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-  }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
 
   .price-card.featured {
     border-color: var(--gold);
@@ -578,9 +479,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     transform: scale(1.04);
   }
 
-  .price-card.featured:hover {
-    transform: scale(1.04) translateY(-4px);
-  }
+  .price-card.featured:hover { transform: scale(1.04) translateY(-4px); }
 
   .featured-badge {
     position: absolute;
@@ -598,52 +497,13 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     white-space: nowrap;
   }
 
-  .plan-name {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-
+  .plan-name { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
   .plan-price { margin-bottom: 6px; }
-
-  .plan-price .amount {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .plan-price .currency {
-    font-size: 1.2rem;
-    color: var(--gray);
-    vertical-align: super;
-    margin-right: 2px;
-  }
-
-  .plan-price .period {
-    font-size: 0.85rem;
-    color: var(--gray);
-  }
-
-  .plan-setup {
-    font-size: 0.82rem;
-    color: var(--gray);
-    margin-bottom: 28px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  .plan-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
+  .plan-price .amount { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--white); line-height: 1; }
+  .plan-price .currency { font-size: 1.2rem; color: var(--gray); vertical-align: super; margin-right: 2px; }
+  .plan-price .period { font-size: 0.85rem; color: var(--gray); }
+  .plan-setup { font-size: 0.82rem; color: var(--gray); margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--card-border); }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
 
   .plan-features li {
     display: flex;
@@ -654,12 +514,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     line-height: 1.5;
   }
 
-  .plan-features li::before {
-    content: '✓';
-    color: var(--gold);
-    font-weight: 700;
-    flex-shrink: 0;
-  }
+  .plan-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
 
   .plan-btn {
     display: block;
@@ -673,45 +528,14 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     letter-spacing: 0.02em;
   }
 
-  .plan-btn.primary {
-    background: var(--gold);
-    color: var(--navy);
-  }
+  .plan-btn.primary { background: var(--gold); color: var(--navy); }
+  .plan-btn.primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .plan-btn.secondary { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+  .plan-btn.secondary:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
 
-  .plan-btn.primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-  }
-
-  .plan-btn.secondary {
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid rgba(201,168,76,0.4);
-  }
-
-  .plan-btn.secondary:hover {
-    background: rgba(201,168,76,0.1);
-    border-color: var(--gold);
-  }
-
-  /* SOCIAL PROOF */
-  .proof {
-    background: var(--navy2);
-    border-top: 1px solid var(--card-border);
-  }
-
-  .proof-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .proof-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 60px;
-  }
+  .proof { background: var(--navy2); border-top: 1px solid var(--card-border); }
+  .proof-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
 
   .proof-card {
     background: var(--card-bg);
@@ -729,36 +553,16 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     color: var(--gold);
     opacity: 0.3;
     position: absolute;
-    top: 16px;
-    left: 24px;
+    top: 16px; left: 24px;
     line-height: 1;
   }
 
-  .proof-text {
-    font-size: 0.95rem;
-    color: var(--gray-light);
-    line-height: 1.7;
-    margin-bottom: 24px;
-    padding-top: 20px;
-  }
+  .proof-text { font-size: 0.95rem; color: var(--gray-light); line-height: 1.7; margin-bottom: 24px; padding-top: 20px; }
 
-  /* FAQ */
   .faq { background: var(--navy); }
-
-  .faq-inner {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .faq-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-
-  .faq-item {
-    border-bottom: 1px solid var(--card-border);
-    padding: 24px 0;
-  }
+  .faq-inner { max-width: 720px; margin: 0 auto; }
+  .faq-header { text-align: center; margin-bottom: 60px; }
+  .faq-item { border-bottom: 1px solid var(--card-border); padding: 24px 0; }
 
   .faq-q {
     font-weight: 600;
@@ -770,24 +574,9 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     gap: 12px;
   }
 
-  .faq-q::before {
-    content: 'Q';
-    color: var(--gold);
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    margin-top: -1px;
-  }
+  .faq-q::before { content: 'Q'; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.1rem; flex-shrink: 0; margin-top: -1px; }
+  .faq-a { font-size: 0.93rem; color: var(--gray-light); line-height: 1.7; padding-left: 26px; }
 
-  .faq-a {
-    font-size: 0.93rem;
-    color: var(--gray-light);
-    line-height: 1.7;
-    padding-left: 26px;
-  }
-
-  /* CTA SECTION */
   .cta-section {
     background: linear-gradient(135deg, var(--navy2) 0%, #0c1828 100%);
     border-top: 1px solid var(--card-border);
@@ -806,25 +595,10 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     pointer-events: none;
   }
 
-  .cta-section .section-title {
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    max-width: 640px;
-    margin: 0 auto 20px;
-  }
+  .cta-section .section-title { font-size: clamp(2rem, 4vw, 3.2rem); max-width: 640px; margin: 0 auto 20px; }
+  .cta-section .section-sub { margin: 0 auto 48px; text-align: center; max-width: 480px; }
+  .cta-note { margin-top: 20px; font-size: 0.82rem; color: var(--gray); }
 
-  .cta-section .section-sub {
-    margin: 0 auto 48px;
-    text-align: center;
-    max-width: 480px;
-  }
-
-  .cta-note {
-    margin-top: 20px;
-    font-size: 0.82rem;
-    color: var(--gray);
-  }
-
-  /* FOOTER */
   footer {
     background: #070f1c;
     padding: 40px 60px;
@@ -834,48 +608,17 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     align-items: center;
   }
 
-  .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--white);
-  }
-
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
   .footer-logo span { color: var(--gold); }
+  .footer-copy { font-size: 0.8rem; color: var(--gray); }
 
-  .footer-copy {
-    font-size: 0.8rem;
-    color: var(--gray);
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeLeft { from { opacity: 0; transform: translate(24px, -50%); } to { opacity: 1; transform: translate(0, -50%); } }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeLeft {
-    from { opacity: 0; transform: translate(24px, -50%); }
-    to { opacity: 1; transform: translate(0, -50%); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
   @media (max-width: 1024px) {
     nav { padding: 20px 30px; }
     .hero { padding: 140px 30px 100px; }
@@ -894,13 +637,11 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Capital City<span> AI Studio</span></div>
-  <a href="start.html" class="nav-cta">Start Free Trial</a>
+  <a href="start.html" class="nav-cta track-click" data-event="NavCTA" data-label="Nav — Start Free Trial">Start Free Trial</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -909,8 +650,9 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     <h1>Your entire content<br>strategy. <em>Done for you.</em><br>Every single month.</h1>
     <p class="hero-sub">Social posts, email newsletters, listing copy, and lead follow-up sequences — all written in your voice, for the Edmonton market, with zero effort on your part.</p>
     <div class="hero-actions">
-      <a href="start.html" class="btn-primary">Start Your Free 30 Days</a>
-      <a href="#how" class="btn-ghost">See how it works</a>
+      <a href="start.html" class="btn-primary track-click" data-event="HeroCTA" data-label="Hero — Start Your Free 30 Days">Start Your Free 30 Days</a>
+      <a href="demo-portfolio.html" class="btn-ghost track-click" data-event="HeroSampleWork" data-label="Hero — View Sample Work" target="_blank">View sample work</a>
+      <a href="#how" class="btn-ghost track-click" data-event="HeroSeeHow" data-label="Hero &mdash; See How It Works">See how it works</a>
     </div>
   </div>
   <div class="hero-stats">
@@ -929,7 +671,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- PROBLEM / SOLUTION -->
 <section class="problem">
   <div class="problem-grid">
     <div class="reveal">
@@ -958,7 +699,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section class="how" id="how">
   <div class="how-inner">
     <div class="how-header reveal">
@@ -991,7 +731,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- DELIVERABLES -->
 <section class="deliverables">
   <div class="deliverables-inner">
     <div class="reveal">
@@ -1032,7 +771,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="pricing-inner">
     <div class="pricing-header reveal">
@@ -1054,7 +792,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
           <li>Notion content workspace</li>
           <li>First 30 days free</li>
         </ul>
-        <a href="https://buy.stripe.com/6oUaEQaGx4cu1ga317cs800" class="plan-btn secondary">Start Free Trial</a>
+        <a href="https://buy.stripe.com/6oUaEQaGx4cu1ga317cs800" class="plan-btn secondary track-click" data-event="PricingCTA" data-label="Pricing — Starter $297">Start Free Trial</a>
       </div>
       <div class="price-card featured">
         <div class="featured-badge">Most Popular</div>
@@ -1072,7 +810,7 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
           <li>Notion content workspace</li>
           <li>First 30 days free</li>
         </ul>
-        <a href="https://buy.stripe.com/00wdR2g0RcJ0bUOdFLcs801" class="plan-btn primary">Start Free Trial</a>
+        <a href="https://buy.stripe.com/00wdR2g0RcJ0bUOdFLcs801" class="plan-btn primary track-click" data-event="PricingCTA" data-label="Pricing — Growth $497">Start Free Trial</a>
       </div>
       <div class="price-card">
         <div class="plan-name">Done For You</div>
@@ -1088,13 +826,12 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
           <li>Priority turnaround</li>
           <li>First 30 days free</li>
         </ul>
-        <a href="https://buy.stripe.com/eVq14gbKB10i8ICcBHcs802" class="plan-btn secondary">Start Free Trial</a>
+        <a href="https://buy.stripe.com/eVq14gbKB10i8ICcBHcs802" class="plan-btn secondary track-click" data-event="PricingCTA" data-label="Pricing — Done For You $797">Start Free Trial</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EARLY ADOPTER -->
 <section class="proof">
   <div class="proof-inner">
     <div class="reveal">
@@ -1122,7 +859,6 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="faq">
   <div class="faq-inner">
     <div class="faq-header reveal">
@@ -1158,24 +894,23 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- FINAL CTA -->
 <section class="cta-section" id="contact">
   <div class="reveal">
     <div class="section-label">Get Started</div>
     <h2 class="section-title">Your first 30 days are on us.</h2>
     <p class="section-sub">Free for 30 days. No calls. No obligation. Cancel anytime before day 30 and you won't be charged.</p>
-    <a href="start.html" class="btn-primary" style="display:inline-block;">Start Your Free Trial</a>
+    <a href="start.html" class="btn-primary track-click" data-event="BottomCTA" data-label="Bottom — Start Your Free Trial" style="display:inline-block;">Start Your Free Trial</a>
     <p class="cta-note">Limited spots available for Edmonton agents. First 30 days completely free.</p>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Capital City<span> AI Studio</span></div>
   <div class="footer-copy">© 2026 Capital City AI Studio. Edmonton, Alberta. All rights reserved.</div>
 </footer>
 
 <script>
+  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -1186,6 +921,38 @@ src="https://www.facebook.com/tr?id=4356945074631222&ev=PageView&noscript=1"
     });
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
+
+  // Button click tracking — Meta Pixel + Clarity
+  document.querySelectorAll('.track-click').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var event = this.dataset.event;
+      var label = this.dataset.label;
+      if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', event, { label: label });
+      }
+      if (typeof clarity !== 'undefined') {
+        clarity('set', event, label);
+      }
+    });
+  });
+
+  // Scroll depth tracking — 25%, 50%, 75%, 100%
+  var scrollMilestones = [25, 50, 75, 100];
+  var fired = {};
+  window.addEventListener('scroll', function() {
+    var scrolled = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    scrollMilestones.forEach(function(milestone) {
+      if (scrolled >= milestone && !fired[milestone]) {
+        fired[milestone] = true;
+        if (typeof fbq !== 'undefined') {
+          fbq('trackCustom', 'ScrollDepth', { depth: milestone + '%' });
+        }
+        if (typeof clarity !== 'undefined') {
+          clarity('set', 'ScrollDepth', milestone + '%');
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>
