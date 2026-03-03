@@ -843,6 +843,149 @@
     header { padding: 0.8rem 1rem; }
     .logo { font-size: 1.1rem; }
   }
+
+  /* CLOSING CTA */
+  .closing-cta-section {
+    border-top: 1px solid var(--border);
+    padding: 5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+  }
+  .closing-cta-section::before {
+    content: 'START';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(8rem, 25vw, 18rem);
+    color: rgba(201,168,76,0.03);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .closing-cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .closing-cta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .closing-cta-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .closing-cta-heading em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .closing-cta-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(245,242,237,0.6);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .closing-cta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+  .closing-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,242,237,0.5);
+    border: 1px solid rgba(245,242,237,0.12);
+    padding: 0.35rem 0.75rem;
+  }
+  .closing-badge--gold {
+    color: var(--gold);
+    border-color: var(--border);
+  }
+  .closing-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .closing-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.12em;
+    transition: all 0.2s;
+  }
+  .closing-btn--primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+  }
+  .closing-btn--primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+  .closing-btn--secondary {
+    color: rgba(245,242,237,0.4);
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid rgba(245,242,237,0.1);
+  }
+  .closing-btn--secondary:hover {
+    color: var(--white);
+    border-color: rgba(245,242,237,0.3);
+  }
+  .closing-cta-urgency {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: rgba(245,242,237,0.3);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .urgency-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: urgencyPulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes urgencyPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  @media (max-width: 480px) {
+    .closing-cta-section { padding: 3.5rem 1.5rem; }
+    .closing-btn--primary { width: 100%; justify-content: center; }
+    .closing-btn--secondary { width: 100%; justify-content: center; }
+    .closing-cta-buttons { flex-direction: column; }
+  }
 </style>
 <script>
   function showPanel(id, btn) {
@@ -1746,7 +1889,7 @@
             <p>It's been about a month since we met at the open house. I know life gets busy and timelines shift — I just wanted to check in without any agenda.</p>
             <p>If you're still actively looking, I'd love to reconnect and make sure I'm sending you the right properties. If the timing has changed, that's completely fine — I'll move you to my monthly market update list so you stay informed without the follow-ups.</p>
             <p>Just hit reply and let me know which camp you're in. Either way, no hard feelings.</p>
-            <div class="sig">Jordan Sloane · REALTOR® · (780) 555-0182 · <a href=
+            <div class="sig">Jordan Sloane · REALTOR® · (780) 555-0182 · <a href="mailto:jordan@jordansloaneyeg.com">jordan@jordansloaneyeg.com</a></div>
           </div>
         </div>
       </div>
@@ -1754,7 +1897,6 @@
   </div>
 </div>
 
-<!-- CLOSING CTA SECTION -->
 <section class="closing-cta-section">
   <div class="closing-cta-inner">
     <div class="closing-cta-label">Ready to get started?</div>
@@ -1779,169 +1921,6 @@
     </div>
   </div>
 </section>
-
-<style>
-  .closing-cta-section {
-    border-top: 1px solid var(--border);
-    padding: 5rem 1.5rem;
-    position: relative;
-    overflow: hidden;
-    background: var(--black);
-  }
-
-  .closing-cta-section::before {
-    content: 'START';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(8rem, 25vw, 18rem);
-    color: rgba(201,168,76,0.03);
-    letter-spacing: 0.1em;
-    pointer-events: none;
-    white-space: nowrap;
-    line-height: 1;
-  }
-
-  .closing-cta-inner {
-    max-width: 640px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .closing-cta-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-  }
-
-  .closing-cta-heading {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 9vw, 5.5rem);
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    margin-bottom: 1.5rem;
-  }
-
-  .closing-cta-heading em {
-    font-style: normal;
-    color: var(--gold);
-  }
-
-  .closing-cta-sub {
-    font-size: 1rem;
-    font-weight: 300;
-    color: rgba(245,242,237,0.6);
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .closing-cta-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
-    margin-bottom: 2.5rem;
-  }
-
-  .closing-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    color: rgba(245,242,237,0.5);
-    border: 1px solid rgba(245,242,237,0.12);
-    padding: 0.35rem 0.75rem;
-  }
-
-  .closing-badge--gold {
-    color: var(--gold);
-    border-color: var(--border);
-  }
-
-  .closing-cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-
-  .closing-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 0.12em;
-    transition: all 0.2s;
-  }
-
-  .closing-btn--primary {
-    background: var(--gold);
-    color: var(--black);
-    padding: 1rem 2rem;
-    font-size: 1.05rem;
-  }
-
-  .closing-btn--primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-  }
-
-  .closing-btn--secondary {
-    color: rgba(245,242,237,0.4);
-    padding: 1rem 1.5rem;
-    font-size: 0.9rem;
-    border: 1px solid rgba(245,242,237,0.1);
-  }
-
-  .closing-btn--secondary:hover {
-    color: var(--white);
-    border-color: rgba(245,242,237,0.3);
-  }
-
-  .closing-cta-urgency {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: rgba(245,242,237,0.3);
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-  }
-
-  .urgency-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-    animation: urgencyPulse 2s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-
-  @keyframes urgencyPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.7); }
-  }
-
-  @media (max-width: 480px) {
-    .closing-cta-section { padding: 3.5rem 1.5rem; }
-    .closing-btn--primary { width: 100%; justify-content: center; }
-    .closing-btn--secondary { width: 100%; justify-content: center; }
-    .closing-cta-buttons { flex-direction: column; }
-  }
-</style>
 
 </body>
 </html>
