@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Coachd — Your Player's Dashboard</title>
+  <meta name="theme-color" content="#040C1A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/design.css">
+  <style>
+    .tab-content { display: none; padding: 20px 20px 0; }
+    .tab-content.active { display: block; }
+    .main-scroll { overflow-y: auto; height: calc(100vh - 132px); -webkit-overflow-scrolling: touch; }
+    .chat-scroll { overflow-y: auto; height: calc(100vh - 196px); padding: 16px 16px 0; -webkit-overflow-scrolling: touch; }
+    .player-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--navy-700);
+    }
+    .player-info { display: flex; flex-direction: column; gap: 2px; }
+    .player-name-display { font-weight: 800; font-size: 16px; }
+    .player-meta { font-size: 12px; color: var(--ice-400); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+    .focus-card {
+      background: linear-gradient(135deg, var(--navy-700), var(--navy-800));
+      border: 1px solid var(--navy-600);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .focus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(230,57,70,0.12);
+      border: 1px solid rgba(230,57,70,0.25);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red-400);
+      margin-bottom: 10px;
+    }
+    .weekly-theme {
+      font-family: var(--font-display);
+      font-size: 28px;
+      line-height: 1.0;
+      margin-bottom: 10px;
+    }
+    .drill-card {
+      background: var(--navy-900);
+      border: 1px solid var(--navy-700);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .drill-header {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .drill-header:active { background: var(--navy-800); }
+    .drill-name { font-weight: 700; font-size: 15px; }
+    .drill-reps { font-size: 12px; color: var(--red-400); font-weight: 700; }
+    .drill-body { padding: 0 16px 16px; display: none; }
+    .drill-body.open { display: block; }
+    .drill-field { margin-bottom: 12px; }
+    .drill-field-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ice-600); margin-bottom: 4px; }
+    .drill-field-value { font-size: 14px; color: var(--ice-200); line-height: 1.55; }
+    .exercise-card {
+      background: var(--navy-900);
+      border: 1px solid var(--navy-700);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .exercise-header {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .exercise-name { font-weight: 700; font-size: 15px; }
+    .exercise-sets { font-size: 12px; color: var(--blue-400); font-weight: 700; }
+    .exercise-body { padding: 0 16px 16px; display: none; }
+    .exercise-body.open { display: block; }
+    .nutrition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .nutrition-card {
+      background: var(--navy-900);
+      border: 1px solid var(--navy-700);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+    .nutrition-icon { font-size: 24px; margin-bottom: 8px; }
+    .nutrition-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ice-600); margin-bottom: 6px; }
+    .nutrition-value { font-size: 13px; color: var(--ice-200); line-height: 1.5; }
+    .chat-input-area {
+      position: fixed;
+      bottom: 72px;
+      left: 0; right: 0;
+      background: var(--navy-900);
+      border-top: 1px solid var(--navy-700);
+      padding: 12px 16px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      display: none;
+    }
+    .chat-input-area.active { display: flex; gap: 10px; }
+    .chat-input-row { display: flex; gap: 10px; align-items: flex-end; width: 100%; }
+    #chatInput {
+      flex: 1;
+      background: var(--navy-800);
+      border: 1.5px solid var(--navy-600);
+      border-radius: 22px;
+      padding: 10px 16px;
+      font-size: 15px;
+      color: var(--ice-100);
+      resize: none;
+      max-height: 120px;
+      outline: none;
+    }
+    #chatInput:focus { border-color: var(--blue-400); }
+    .chat-send-btn {
+      width: 42px; height: 42px;
+      background: var(--red-500);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-red);
+      transition: all 0.15s ease;
+    }
+    .chat-send-btn:active { transform: scale(0.92); }
+    .chat-suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .chat-suggestion {
+      background: var(--navy-800);
+      border: 1px solid var(--navy-600);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--ice-200);
+      transition: all 0.15s ease;
+      text-align: left;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .chat-suggestion:active { background: var(--navy-700); border-color: var(--red-500); }
+    .skeleton-line { height: 16px; border-radius: 8px; margin-bottom: 10px; }
+    .skeleton-line.short { width: 60%; }
+    .skeleton-line.medium { width: 80%; }
+    .refresh-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 1px dashed var(--navy-600);
+      border-radius: var(--radius-md);
+      color: var(--ice-400);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.2s ease;
+    }
+    .refresh-btn:active { background: var(--navy-800); color: var(--ice-100); }
+  </style>
+</head>
+<body>
+<!-- TOP BAR -->
+<div class="player-header" id="playerHeader">
+  <div class="player-info">
+    <div class="player-name-display" id="playerNameHeader">Loading...</div>
+    <div class="player-meta" id="playerMetaHeader">—</div>
+  </div>
+  <img src="/logo.svg" style="width:36px;height:36px" alt="Coachd">
+</div>
+
+<!-- TRIAL BANNER -->
+<div class="trial-banner" id="trialBanner" style="display:none">
+  🏒 Free trial active · <a href="/pricing" id="trialLink">Upgrade to keep your plan →</a>
+</div>
+
+<!-- TAB CONTENT AREAS -->
+
+<!-- SKILLS TAB -->
+<div class="tab-content active" id="tab-skills">
+  <div class="main-scroll" id="skills-scroll">
+    <div style="padding-bottom: 24px;">
+      <!-- Weekly theme card -->
+      <div class="focus-card" id="themCard">
+        <div class="focus-badge">⚡ THIS WEEK'S FOCUS</div>
+        <div class="weekly-theme" id="weeklyTheme">
+          <div class="skeleton skeleton-line" style="width:80%"></div>
+        </div>
+        <div class="text-sm text-muted" id="developmentNote">
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line short"></div>
+        </div>
+      </div>
+      <!-- Skills section -->
+      <div id="skillsContent">
+        <div class="label" style="margin-bottom:12px">SKILLS</div>
+        <div class="card" id="skillsCard">
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line medium"></div>
+          <div class="skeleton skeleton-line short"></div>
+        </div>
+      </div>
+      <!-- Refresh button -->
+      <button class="refresh-btn" id="refreshBtn" onclick="refreshPlan()" style="display:none">
+        🔄 Generate new plan for this week
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TRAINING TAB -->
+<div class="tab-content" id="tab-training">
+  <div class="main-scroll" id="training-scroll">
+    <div style="padding-bottom: 24px;">
+      <div id="trainingContent">
+        <div class="label" style="margin-bottom:12px">OFF-ICE TRAINING</div>
+        <div class="card">
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line medium"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NUTRITION TAB -->
+<div class="tab-content" id="tab-nutrition">
+  <div class="main-scroll" id="nutrition-scroll">
+    <div style="padding-bottom: 24px;">
+      <div id="nutritionContent">
+        <div class="label" style="margin-bottom:12px">NUTRITION</div>
+        <div class="card">
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line medium"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COACH CHAT TAB -->
+<div class="tab-content" id="tab-chat">
+  <div class="chat-scroll" id="chatScroll">
+    <div id="chatMessages"></div>
+    <div id="chatSuggestions" class="chat-suggestions"></div>
+  </div>
+</div>
+
+<!-- CHAT INPUT (shown only on coach tab) -->
+<div class="chat-input-area" id="chatInputArea">
+  <div class="chat-input-row">
+    <textarea id="chatInput" placeholder="Ask your coach anything..." rows="1"
+      oninput="autoGrow(this)" onkeydown="handleChatKey(event)"></textarea>
+    <button class="chat-send-btn" onclick="sendMessage()">→</button>
+  </div>
+</div>
+
+<!-- BOTTOM TAB BAR -->
+<nav class="tab-bar">
+  <button class="tab-item active" id="tabSkills" onclick="switchTab('skills')">
+    <span class="tab-icon">🏒</span>
+    Skills
+  </button>
+  <button class="tab-item" id="tabTraining" onclick="switchTab('training')">
+    <span class="tab-icon">💪</span>
+    Train
+  </button>
+  <button class="tab-item" id="tabNutrition" onclick="switchTab('nutrition')">
+    <span class="tab-icon">🥦</span>
+    Fuel
+  </button>
+  <button class="tab-item" id="tabChat" onclick="switchTab('chat')">
+    <span class="tab-icon">💬</span>
+    Coach
+  </button>
+</nav>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const playerId = params.get('id');
+let playerData = null;
+let planData = null;
+let currentTab = 'skills';
+
+// ── INIT ──
+async function init() {
+  if (!playerId) { window.location.href = '/'; return; }
+  try {
+    const res = await fetch(`/api/player/${playerId}`);
+    const data = await res.json();
+    playerData = data.player;
+    planData = data.plan;
+    renderPlayerHeader();
+    if (planData) {
+      renderAllContent();
+    } else {
+      await generatePlan();
+    }
+  } catch (err) {
+    console.error('Load error:', err);
+  }
+}
+
+function renderPlayerHeader() {
+  if (!playerData) return;
+  document.getElementById('playerNameHeader').textContent = `${playerData.player_name}'s Plan`;
+  document.getElementById('playerMetaHeader').textContent = `${playerData.position} · ${playerData.level} · Age ${playerData.age}`;
+  if (playerData.subscription_status === 'trial') {
+    document.getElementById('trialBanner').style.display = 'block';
+  }
+}
+
+async function generatePlan() {
+  try {
+    const res = await fetch('/api/plan/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ player_id: playerId })
+    });
+    const data = await res.json();
+    planData = { plan: data.plan };
+    renderAllContent();
+  } catch (err) {
+    document.getElementById('weeklyTheme').textContent = 'Failed to load plan. Tap refresh.';
+    document.getElementById('refreshBtn').style.display = 'flex';
+  }
+}
+
+async function refreshPlan() {
+  document.getElementById('refreshBtn').textContent = '⏳ Generating...';
+  await generatePlan();
+  document.getElementById('refreshBtn').style.display = 'flex';
+  document.getElementById('refreshBtn').innerHTML = '🔄 Generate new plan for this week';
+}
+
+function renderAllContent() {
+  if (!planData?.plan) return;
+  const p = planData.plan;
+  // Theme card
+  document.getElementById('weeklyTheme').textContent = p.weekly_theme || 'This Week\'s Focus';
+  document.getElementById('developmentNote').textContent = p.development_note || '';
+  // Skills
+  renderSkills(p.skills);
+  // Training
+  renderTraining(p.training);
+  // Nutrition
+  renderNutrition(p.nutrition);
+  // Chat suggestions
+  renderChatSuggestions();
+  // Show refresh button
+  document.getElementById('refreshBtn').style.display = 'flex';
+}
+
+function renderSkills(s) {
+  if (!s) return;
+  let html = `
+    <div class="card" style="margin-bottom:16px">
+      <div class="label" style="margin-bottom:6px">Skills Focus</div>
+      <div style="font-weight:800;font-size:18px;margin-bottom:8px">${s.title}</div>
+      <div class="text-sm text-muted" style="margin-bottom:0">${s.why_it_matters}</div>
+    </div>`;
+  [s.drill_1, s.drill_2].forEach((d, i) => {
+    if (!d) return;
+    html += `
+    <div class="drill-card">
+      <div class="drill-header" onclick="toggleExpand(this)">
+        <div>
+          <div class="drill-name">${d.name}</div>
+          <div class="drill-reps">${d.reps}</div>
+        </div>
+        <svg style="color:var(--ice-600);flex-shrink:0;transition:transform 0.25s ease" id="arrow-drill-${i}" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="drill-body">
+        ${d.what_you_need ? `<div class="drill-field"><div class="drill-field-label">What you need</div><div class="drill-field-value">${d.what_you_need}</div></div>` : ''}
+        <div class="drill-field"><div class="drill-field-label">How to do it</div><div class="drill-field-value">${d.execution}</div></div>
+        ${d.what_to_feel ? `<div class="highlight-blue" style="margin-top:8px"><div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:4px">What to feel</div><div style="font-size:13px">${d.what_to_feel}</div></div>` : ''}
+      </div>
+    </div>`;
+  });
+  if (s.scout_insight) {
+    html += `
+    <div class="highlight-gold">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-400);margin-bottom:6px">⭐ Scout Insight</div>
+      <div style="font-size:14px;line-height:1.55">${s.scout_insight}</div>
+    </div>`;
+  }
+  document.getElementById('skillsContent').innerHTML = `<div class="label" style="margin-bottom:12px">SKILLS DEVELOPMENT</div>${html}`;
+}
+
+function renderTraining(t) {
+  if (!t) return;
+  let html = `
+    <div class="card" style="margin-bottom:16px">
+      <div class="label" style="margin-bottom:6px">Training Focus</div>
+      <div style="font-weight:800;font-size:18px;margin-bottom:8px">${t.title}</div>
+      <div class="text-sm text-muted">${t.why_it_matters}</div>
+    </div>`;
+  [t.exercise_1, t.exercise_2, t.exercise_3].forEach((e, i) => {
+    if (!e) return;
+    html += `
+    <div class="exercise-card">
+      <div class="exercise-header" onclick="toggleExpand(this)">
+        <div>
+          <div class="exercise-name">${e.name}</div>
+          <div class="exercise-sets">${e.sets_reps}</div>
+        </div>
+        <svg style="color:var(--ice-600);flex-shrink:0;transition:transform 0.25s ease" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="exercise-body">
+        <div class="drill-field"><div class="drill-field-label">How to do it</div><div class="drill-field-value">${e.how_to}</div></div>
+        ${e.hockey_benefit ? `<div class="highlight-blue" style="margin-top:8px"><div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:4px">Hockey benefit</div><div style="font-size:13px">${e.hockey_benefit}</div></div>` : ''}
+      </div>
+    </div>`;
+  });
+  if (t.recovery_note) {
+    html += `<div class="highlight-green" style="margin-top:8px"><div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-400);margin-bottom:6px">🔄 Recovery</div><div style="font-size:14px">${t.recovery_note}</div></div>`;
+  }
+  html += `<p style="font-size:11px;color:var(--ice-600);margin-top:16px;text-align:center">Always consult a professional for exercise programmes for young athletes.</p>`;
+  document.getElementById('trainingContent').innerHTML = `<div class="label" style="margin-bottom:12px">OFF-ICE TRAINING</div>${html}`;
+}
+
+function renderNutrition(n) {
+  if (!n) return;
+  let html = `
+    <div class="card" style="margin-bottom:16px">
+      <div class="label" style="margin-bottom:6px">Nutrition Focus</div>
+      <div style="font-weight:800;font-size:18px;margin-bottom:8px">${n.title}</div>
+      <div class="text-sm text-muted">${n.the_focus}</div>
+    </div>
+    <div class="nutrition-grid">
+      <div class="nutrition-card">
+        <div class="nutrition-icon">⚡</div>
+        <div class="nutrition-label" style="color:var(--green-400)">Pre-Training</div>
+        <div class="nutrition-value">${n.pre_training}</div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-icon">🔄</div>
+        <div class="nutrition-label" style="color:var(--blue-400)">Post-Training</div>
+        <div class="nutrition-value">${n.post_training}</div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-icon">⭐</div>
+        <div class="nutrition-label" style="color:var(--gold-400)">Daily Habit</div>
+        <div class="nutrition-value">${n.daily_habit}</div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-icon">⚠️</div>
+        <div class="nutrition-label" style="color:var(--red-400)">Avoid This</div>
+        <div class="nutrition-value">${n.avoid_this}</div>
+      </div>
+    </div>`;
+  document.getElementById('nutritionContent').innerHTML = `<div class="label" style="margin-bottom:12px">NUTRITION & FUEL</div>${html}`;
+}
+
+function renderChatSuggestions() {
+  if (!playerData) return;
+  const suggestions = [
+    `What should ${playerData.player_name} focus on most right now?`,
+    `What do coaches look for at ${playerData.level} for a ${playerData.position}?`,
+    `Best drills for a ${playerData.age}-year-old ${playerData.position}?`,
+  ];
+  const html = suggestions.map(s =>
+    `<button class="chat-suggestion" onclick="sendSuggestion('${s.replace(/'/g, "\\'")}')">💬 ${s}</button>`
+  ).join('');
+  document.getElementById('chatSuggestions').innerHTML = `
+    <div class="label" style="margin-bottom:12px">QUICK QUESTIONS</div>${html}`;
+}
+
+// ── TAB SWITCHING ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('chatInputArea').classList.remove('active');
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  document.getElementById(`tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active');
+  currentTab = tab;
+  if (tab === 'chat') {
+    document.getElementById('chatInputArea').classList.add('active');
+    scrollChatToBottom();
+  }
+}
+
+// ── EXPANDABLE CARDS ──
+function toggleExpand(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('svg');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+// ── CHAT ──
+function appendMessage(role, text) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `chat-message ${role === 'user' ? 'user' : ''}`;
+  div.innerHTML = `<div class="chat-bubble ${role === 'user' ? 'user' : 'ai'}">${text.replace(/\n/g, '<br>')}</div>`;
+  msgs.appendChild(div);
+  scrollChatToBottom();
+  return div;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-message';
+  div.id = 'typingIndicator';
+  div.innerHTML = `<div class="chat-bubble ai"><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  msgs.appendChild(div);
+  scrollChatToBottom();
+}
+
+function hideTyping() {
+  const el = document.getElementById('typingIndicator');
+  if (el) el.remove();
+}
+
+function scrollChatToBottom() {
+  const scroll = document.getElementById('chatScroll');
+  setTimeout(() => { scroll.scrollTop = scroll.scrollHeight; }, 50);
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const message = input.value.trim();
+  if (!message || !playerId) return;
+  document.getElementById('chatSuggestions').style.display = 'none';
+  input.value = '';
+  input.style.height = 'auto';
+  appendMessage('user', message);
+  showTyping();
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ player_id: playerId, message })
+    });
+    const data = await res.json();
+    hideTyping();
+    appendMessage('assistant', data.response || 'Something went wrong. Try again.');
+  } catch (err) {
+    hideTyping();
+    appendMessage('assistant', 'Connection issue. Please try again.');
+  }
+}
+
+function sendSuggestion(text) {
+  document.getElementById('chatInput').value = text;
+  sendMessage();
+}
+
+function handleChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoGrow(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+// ── START ──
+init();
+</script>
+</body>
+</html>

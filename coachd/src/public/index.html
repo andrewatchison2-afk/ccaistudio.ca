@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Coachd — AI Hockey Development</title>
+  <meta name="description" content="Your player's personal AI hockey coach. Personalised skills, training, and nutrition — built for their position, age, and level.">
+  <meta name="theme-color" content="#040C1A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/design.css">
+  <style>
+    /* Landing-specific styles */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(230,57,70,0.1) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-logo { width: 72px; height: 72px; margin-bottom: 20px; }
+    .hero-wordmark {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 0.25em;
+      color: var(--ice-400);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-size: clamp(52px, 15vw, 88px);
+      line-height: 0.92;
+      margin-bottom: 24px;
+      color: var(--ice-100);
+    }
+    .hero h1 span { color: var(--red-500); }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--ice-400);
+      max-width: 320px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+    .trust-chips {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .trust-chip {
+      background: var(--navy-800);
+      border: 1px solid var(--navy-600);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ice-400);
+    }
+    .cta-group { width: 100%; max-width: 340px; }
+    .cta-note { font-size: 12px; color: var(--ice-600); margin-top: 12px; text-align: center; }
+    .stats-bar {
+      background: var(--navy-800);
+      border-top: 1px solid var(--navy-700);
+      border-bottom: 1px solid var(--navy-700);
+      padding: 28px 24px;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 480px; margin: 0 auto; text-align: center; }
+    .stat-number { font-family: var(--font-display); font-size: 32px; color: var(--ice-100); line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--ice-400); font-weight: 600; letter-spacing: 0.05em; margin-top: 4px; text-transform: uppercase; }
+    .how-it-works { padding: 60px 24px; max-width: 480px; margin: 0 auto; }
+    .step-card { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num {
+      width: 36px; height: 36px; min-width: 36px;
+      background: var(--red-glow);
+      border: 1.5px solid rgba(230,57,70,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--red-400);
+    }
+    .step-connector { width: 1px; background: var(--navy-700); flex-grow: 1; margin: 8px 0; align-self: stretch; min-height: 24px; margin-left: 17px; }
+    .features { padding: 0 24px 60px; max-width: 480px; margin: 0 auto; }
+    .feature-icon { font-size: 32px; margin-bottom: 12px; }
+    .testimonial { padding: 40px 24px; max-width: 480px; margin: 0 auto; }
+    .quote-mark { font-family: var(--font-display); font-size: 80px; color: var(--red-500); line-height: 0.5; margin-bottom: 16px; opacity: 0.6; }
+    .pricing-section { padding: 60px 24px; max-width: 480px; margin: 0 auto; }
+    .price-display { font-family: var(--font-display); font-size: 72px; line-height: 1; color: var(--ice-100); }
+    .price-period { font-size: 18px; color: var(--ice-400); font-weight: 500; }
+    .faq-section { padding: 0 24px 60px; max-width: 480px; margin: 0 auto; }
+    footer {
+      border-top: 1px solid var(--navy-700);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--ice-600);
+    }
+    footer .footer-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    footer img { width: 28px; height: 28px; }
+    footer .footer-wordmark { font-family: var(--font-display); font-size: 18px; letter-spacing: 0.2em; color: var(--ice-400); }
+  </style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <img src="/logo.svg" class="hero-logo" alt="Coachd">
+  <div class="hero-wordmark">COACHD</div>
+  <h1 class="fade-in">TRAIN<br>SMARTER.<br><span>PLAY</span><br>BETTER.</h1>
+  <p class="hero-sub fade-in-1">
+    Your player's personal AI hockey coach — personalised skills, training, and nutrition built for their position, age, and level.
+  </p>
+  <div class="trust-chips fade-in-2">
+    <span class="trust-chip">🏒 All positions</span>
+    <span class="trust-chip">⚡ Year-round</span>
+    <span class="trust-chip">🇨🇦 Built for Canadian hockey</span>
+  </div>
+  <div class="cta-group fade-in-3">
+    <a href="/signup" class="btn btn-primary btn-lg">START TRAINING TONIGHT →</a>
+    <p class="cta-note">7 days free · $19.99/month · Cancel anytime</p>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-number">600K+</div>
+      <div class="stat-label">Canadian Players</div>
+    </div>
+    <div>
+      <div class="stat-number">5</div>
+      <div class="stat-label">Positions Covered</div>
+    </div>
+    <div>
+      <div class="stat-number">All</div>
+      <div class="stat-label">Age Groups</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="stack-6">
+    <div>
+      <div class="label" style="margin-bottom:16px">How It Works</div>
+      <h2>Three minutes to your player's first plan</h2>
+    </div>
+    <div class="stack-4">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div>
+          <div style="font-weight:700; margin-bottom:4px">Tell us about your player</div>
+          <div class="text-sm text-muted">Position, age, level, and their main development goal.</div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div>
+          <div style="font-weight:700; margin-bottom:4px">Get a personalised weekly plan</div>
+          <div class="text-sm text-muted">Skills drills, off-ice training, and nutrition — built specifically for them. Updated every week.</div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div>
+          <div style="font-weight:700; margin-bottom:4px">Chat with your AI coach anytime</div>
+          <div class="text-sm text-muted">Ask anything. Before practice, after a game, any time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="label" style="margin-bottom:16px">What You Get</div>
+  <div class="stack-4">
+    <div class="card">
+      <div class="feature-icon">🏒</div>
+      <div style="font-weight:700; font-size:17px; margin-bottom:8px">Position-Specific Skills</div>
+      <div class="text-sm text-muted" style="margin-bottom:12px">Not generic drills from YouTube. Specific techniques for a 12-year-old winger vs a 10-year-old defenceman. What scouts actually watch at your player's level.</div>
+      <span class="badge badge-red">Position-targeted</span>
+    </div>
+    <div class="card">
+      <div class="feature-icon">💪</div>
+      <div style="font-weight:700; font-size:17px; margin-bottom:8px">Age-Appropriate Training</div>
+      <div class="text-sm text-muted" style="margin-bottom:12px">Hockey athleticism isn't adult gym workouts. Explosive lateral power, edge strength, and first-step quickness — built for your player's age and physical stage.</div>
+      <span class="badge badge-blue">No gym required</span>
+    </div>
+    <div class="card">
+      <div class="feature-icon">🥦</div>
+      <div style="font-weight:700; font-size:17px; margin-bottom:8px">Hockey Nutrition</div>
+      <div class="text-sm text-muted" style="margin-bottom:12px">What to eat before training. How to recover. What most hockey parents get wrong. Practical advice that fits a real family's life.</div>
+      <span class="badge badge-green">Real food only</span>
+    </div>
+    <div class="card">
+      <div class="feature-icon">💬</div>
+      <div style="font-weight:700; font-size:17px; margin-bottom:8px">AI Coach Chat</div>
+      <div class="text-sm text-muted" style="margin-bottom:12px">Ask what coaches look for at your player's level. Get specific drill recommendations. Talk through tryout preparation. Your coach knows your player.</div>
+      <span class="badge badge-gold">Unlimited</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="card card-glow">
+    <div class="quote-mark">"</div>
+    <p style="font-size:16px; line-height:1.65; margin-bottom:16px">
+      I was spending $80 an hour on skills sessions. Coachd gives me specific drills and a weekly plan for less than one lesson. My son is more prepared for development than he's ever been.
+    </p>
+    <div class="row" style="gap:12px">
+      <div style="width:36px;height:36px;background:var(--navy-700);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px">👨</div>
+      <div>
+        <div style="font-weight:700;font-size:13px">Hockey parent, Atom AA</div>
+        <div class="text-xs text-muted">Alberta · Beta user</div>
+      </div>
+    </div>
+    <div class="text-xs text-muted" style="margin-top:12px">Results may vary.</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="text-center stack-6">
+    <div>
+      <div class="label" style="margin-bottom:12px">Simple Pricing</div>
+      <h2>One plan.<br>Everything included.</h2>
+    </div>
+    <div class="card card-glow">
+      <div class="text-center stack-4">
+        <div>
+          <span class="price-display">$19</span>
+          <span style="font-size:32px;font-family:var(--font-display)">.99</span>
+          <span class="price-period">/month</span>
+        </div>
+        <ul class="checklist">
+          <li><span class="check-icon"></span><span>Personalised weekly development plan</span></li>
+          <li><span class="check-icon"></span><span>Position and level specific skills drills</span></li>
+          <li><span class="check-icon"></span><span>Age-appropriate off-ice training</span></li>
+          <li><span class="check-icon"></span><span>Hockey nutrition guidance</span></li>
+          <li><span class="check-icon"></span><span>AI coach chat — unlimited</span></li>
+          <li><span class="check-icon"></span><span>New plan every week, all year</span></li>
+          <li><span class="check-icon"></span><span>Cancel anytime</span></li>
+        </ul>
+        <a href="/signup" class="btn btn-primary btn-lg">START YOUR FREE WEEK →</a>
+        <p style="font-size:12px;color:var(--ice-600)">Credit card required. 7 days free, then $19.99/month.<br>Cancel before day 7 and you won't be charged.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="label" style="margin-bottom:16px">Questions</div>
+  <div class="stack-0">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Is this really personalised for my player?
+        <svg class="faq-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="faq-answer">Yes. Every plan is built from your player's position, age, and level — not a generic template. A 10-year-old winger gets completely different advice from a 14-year-old defenceman. We use Claude (the AI behind it) to reason about what your specific player needs, not what players in general need.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What ages and levels does this work for?
+        <svg class="faq-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="faq-answer">Ages 6–18, all positions, from House League through Rep AAA. The AI adjusts everything — exercise types, intensity, complexity, and coaching language — based on age and level. A House League Novice player gets age-appropriate fun fundamentals. A Rep AAA Bantam player gets elite development details.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How do I cancel?
+        <svg class="faq-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="faq-answer">Email us at hello@coachd.app or cancel directly through the app any time. Cancel before day 7 of your free trial and you won't be charged anything. We don't make it hard — if it's not working for your family, we don't want your money.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="/logo.svg" alt="Coachd">
+    <span class="footer-wordmark">COACHD</span>
+  </div>
+  <div style="margin-bottom:8px">© 2026 Coachd · Built in Lethbridge, Alberta for hockey families everywhere</div>
+  <div style="display:flex;gap:16px;justify-content:center">
+    <a href="#" style="color:var(--ice-600)">Privacy</a>
+    <a href="#" style="color:var(--ice-600)">Terms</a>
+    <a href="mailto:hello@coachd.app" style="color:var(--ice-600)">Contact</a>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').classList.remove('open');
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+</script>
+</body>
+</html>
