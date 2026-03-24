@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Set Up Your Player — Coachd</title>
+  <meta name="theme-color" content="#040C1A">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/design.css">
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .signup-header {
+      padding: 20px 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .logo-row { display: flex; align-items: center; gap: 10px; }
+    .logo-row img { width: 32px; height: 32px; }
+    .logo-row span { font-family: var(--font-display); font-size: 20px; letter-spacing: 0.2em; color: var(--ice-400); }
+    .step-info { display: flex; justify-content: space-between; align-items: center; }
+    .step-label { font-size: 12px; font-weight: 700; color: var(--ice-400); letter-spacing: 0.05em; }
+    .form-container { flex: 1; padding: 0 24px 40px; max-width: 480px; width: 100%; margin: 0 auto; }
+    .step-page { display: none; }
+    .step-page.active { display: block; }
+    .step-heading { margin-bottom: 28px; }
+    .step-heading h2 { font-family: var(--font-display); font-size: 36px; margin-bottom: 6px; }
+    .step-heading p { font-size: 14px; color: var(--ice-400); }
+    .form-nav { display: flex; gap: 12px; margin-top: 28px; }
+    /* Loading state */
+    .loading-state { display: none; text-align: center; padding: 60px 24px; }
+    .loading-state.active { display: block; }
+    .loading-text { font-size: 17px; font-weight: 600; margin-top: 20px; }
+    .loading-sub { font-size: 13px; color: var(--ice-400); margin-top: 8px; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .puck-loading { animation: pulse 1.5s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+<div class="signup-header">
+  <div class="logo-row">
+    <img src="/logo.svg" alt="Coachd">
+    <span>COACHD</span>
+  </div>
+  <div class="step-info">
+    <span class="step-label" id="stepLabel">STEP 1 OF 2</span>
+    <span class="step-label" id="stepTitle">YOUR DETAILS</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width:50%"></div>
+  </div>
+</div>
+
+<div class="form-container">
+  <!-- LOADING STATE -->
+  <div class="loading-state" id="loadingState">
+    <div class="puck-loading">
+      <img src="/logo.svg" style="width:80px;height:80px" alt="">
+    </div>
+    <div class="loading-text" id="loadingText">Building your player's plan...</div>
+    <div class="loading-sub" id="loadingSubtext">Analysing position, age, and development goals...</div>
+  </div>
+
+  <!-- STEP 1 — Parent + Player basics -->
+  <div class="step-page active" id="step1">
+    <div class="step-heading">
+      <h2>Let's get started</h2>
+      <p>Tell us about you and your player. Takes 2 minutes.</p>
+    </div>
+    <div class="stack-4">
+      <div class="input-group">
+        <label class="input-label">Your name</label>
+        <input type="text" id="parent_name" placeholder="e.g. Mike" autocomplete="given-name">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Your email</label>
+        <input type="email" id="parent_email" placeholder="your@email.com" autocomplete="email">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Your player's name</label>
+        <input type="text" id="player_name" placeholder="e.g. Connor" autocomplete="off">
+      </div>
+    </div>
+    <div class="form-nav">
+      <button class="btn btn-primary" onclick="goToStep2()">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 — Player details -->
+  <div class="step-page" id="step2">
+    <div class="step-heading">
+      <h2>About <span id="playerNameDisplay" style="color:var(--red-500)">your player</span></h2>
+      <p>This is how we personalise everything.</p>
+    </div>
+    <div class="stack-4">
+      <div class="input-group">
+        <label class="input-label">Position</label>
+        <select id="position">
+          <option value="">Select position</option>
+          <option value="Center">Center</option>
+          <option value="Left Wing">Left Wing</option>
+          <option value="Right Wing">Right Wing</option>
+          <option value="Defense">Defense</option>
+          <option value="Goalie">Goalie</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Age</label>
+        <select id="age">
+          <option value="">Select age</option>
+          <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+          <option value="9">9</option><option value="10">10</option><option value="11">11</option>
+          <option value="12">12</option><option value="13">13</option><option value="14">14</option>
+          <option value="15">15</option><option value="16">16</option><option value="17">17</option>
+          <option value="18">18</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Current level</label>
+        <select id="level">
+          <option value="">Select level</option>
+          <option value="House League">House League</option>
+          <option value="Rep A">Rep A</option>
+          <option value="Rep AA">Rep AA</option>
+          <option value="Rep AAA">Rep AAA</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Main development goal</label>
+        <select id="primary_goal">
+          <option value="">What matters most right now?</option>
+          <option value="Get stronger and faster on the ice">Get stronger and faster on the ice</option>
+          <option value="Improve skills and hockey sense">Improve skills and hockey sense</option>
+          <option value="Better nutrition and recovery">Better nutrition and recovery</option>
+          <option value="Prepare for upcoming tryouts">Prepare for upcoming tryouts</option>
+          <option value="Complete all-around development">Complete all-around development</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Next tryout date <span style="color:var(--ice-600);font-weight:400">(optional)</span></label>
+        <input type="date" id="tryout_date">
+      </div>
+    </div>
+    <div class="form-nav">
+      <button class="btn btn-secondary" onclick="goToStep1()" style="width:auto;padding:15px 20px">← Back</button>
+      <button class="btn btn-primary" onclick="submitForm()">Build My Plan →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function goToStep2() {
+    const name = document.getElementById('parent_name').value.trim();
+    const email = document.getElementById('parent_email').value.trim();
+    const playerName = document.getElementById('player_name').value.trim();
+    if (!name || !email || !playerName) {
+      const inputs = [
+        document.getElementById('parent_name'),
+        document.getElementById('parent_email'),
+        document.getElementById('player_name')
+      ];
+      inputs.forEach(el => {
+        if (!el.value.trim()) { el.classList.add('shake', 'error'); setTimeout(() => el.classList.remove('shake'), 500); }
+      });
+      return;
+    }
+    if (!email.includes('@')) {
+      const el = document.getElementById('parent_email');
+      el.classList.add('shake', 'error'); setTimeout(() => el.classList.remove('shake', 'error'), 500);
+      return;
+    }
+    document.getElementById('playerNameDisplay').textContent = playerName;
+    document.getElementById('step1').classList.remove('active');
+    document.getElementById('step2').classList.add('active');
+    document.getElementById('stepLabel').textContent = 'STEP 2 OF 2';
+    document.getElementById('stepTitle').textContent = 'PLAYER DETAILS';
+    document.getElementById('progressFill').style.width = '100%';
+  }
+
+  function goToStep1() {
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('stepLabel').textContent = 'STEP 1 OF 2';
+    document.getElementById('stepTitle').textContent = 'YOUR DETAILS';
+    document.getElementById('progressFill').style.width = '50%';
+  }
+
+  async function submitForm() {
+    const position = document.getElementById('position').value;
+    const age = document.getElementById('age').value;
+    const level = document.getElementById('level').value;
+    const goal = document.getElementById('primary_goal').value;
+    if (!position || !age || !level || !goal) {
+      [document.getElementById('position'), document.getElementById('age'),
+       document.getElementById('level'), document.getElementById('primary_goal')].forEach(el => {
+        if (!el.value) { el.classList.add('shake'); setTimeout(() => el.classList.remove('shake'), 500); }
+      });
+      return;
+    }
+    const playerName = document.getElementById('player_name').value.trim();
+    // Show loading
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('loadingState').classList.add('active');
+    document.getElementById('loadingText').textContent = `Building ${playerName}'s personalised plan...`;
+    const loadingMessages = [
+      'Analysing position and development goals...',
+      'Generating skills drills for your player...',
+      'Building the training programme...',
+      'Setting up your AI coach...'
+    ];
+    let msgIdx = 0;
+    const msgInterval = setInterval(() => {
+      msgIdx = (msgIdx + 1) % loadingMessages.length;
+      document.getElementById('loadingSubtext').textContent = loadingMessages[msgIdx];
+    }, 1800);
+    try {
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          parent_name: document.getElementById('parent_name').value.trim(),
+          parent_email: document.getElementById('parent_email').value.trim(),
+          player_name: playerName,
+          position, age, level,
+          tryout_date: document.getElementById('tryout_date').value || null,
+          primary_goal: goal
+        })
+      });
+      const data = await res.json();
+      clearInterval(msgInterval);
+      if (data.redirect) { window.location.href = data.redirect; return; }
+      if (data.playerId) {
+        // Go to Stripe
+        document.getElementById('loadingText').textContent = 'Redirecting to payment...';
+        document.getElementById('loadingSubtext').textContent = '7-day free trial · Card required · Cancel anytime';
+        const checkoutRes = await fetch(`/api/checkout/${data.playerId}`);
+        const checkoutData = await checkoutRes.json();
+        window.location.href = checkoutData.url;
+      }
+    } catch (err) {
+      clearInterval(msgInterval);
+      document.getElementById('loadingState').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+      alert('Something went wrong. Please try again.');
+    }
+  }
+</script>
+</body>
+</html>
