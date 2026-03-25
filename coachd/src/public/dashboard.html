@@ -343,6 +343,11 @@ async function init() {
       renderAllContent();
       document.getElementById('demoBanner').style.display = 'block';
       document.getElementById('refreshBtn').style.display = 'none';
+      // Shrink scroll areas to account for the demo banner height
+      const bannerH = document.getElementById('demoBanner').offsetHeight;
+      document.querySelectorAll('.main-scroll').forEach(el => {
+        el.style.height = `calc(100vh - ${132 + bannerH}px)`;
+      });
     } catch (err) {
       console.error('Demo load error:', err);
     }
