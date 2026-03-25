@@ -203,6 +203,11 @@
   🏒 Free trial active · <a href="/pricing" id="trialLink">Upgrade to keep your plan →</a>
 </div>
 
+<!-- DEMO BANNER -->
+<div id="demoBanner" style="display:none;background:rgba(230,57,70,0.1);border-bottom:1px solid rgba(230,57,70,0.25);padding:10px 20px;text-align:center;font-size:13px;font-weight:600;color:var(--ice-200)">
+  👀 Sample plan — <a href="/signup" style="color:var(--red-400);text-decoration:none">Start your free week to get your player's real plan →</a>
+</div>
+
 <!-- TAB CONTENT AREAS -->
 
 <!-- SKILLS TAB -->
@@ -269,13 +274,26 @@
 
 <!-- COACH CHAT TAB -->
 <div class="tab-content" id="tab-chat">
-  <div class="chat-scroll" id="chatScroll">
-    <div id="chatMessages"></div>
-    <div id="chatSuggestions" class="chat-suggestions"></div>
+  <!-- Demo CTA (shown in demo mode) -->
+  <div id="demoChatCta" style="display:none;padding:40px 24px;text-align:center">
+    <div style="font-size:48px;margin-bottom:16px">💬</div>
+    <div style="font-family:var(--font-display);font-size:26px;margin-bottom:12px">Your AI Coach</div>
+    <div style="font-size:14px;color:var(--ice-400);line-height:1.6;margin-bottom:28px;max-width:280px;margin-left:auto;margin-right:auto">
+      Ask anything — what scouts watch for, specific drills, pre-game prep. Your coach knows your player's position, age, and level.
+    </div>
+    <a href="/signup" class="btn btn-primary btn-lg" style="display:block;max-width:300px;margin:0 auto">START FREE WEEK TO UNLOCK →</a>
+    <p style="font-size:12px;color:var(--ice-600);margin-top:12px">7 days free · CA$19.99/month after · Cancel anytime</p>
+  </div>
+  <!-- Real chat (hidden in demo mode) -->
+  <div id="realChat">
+    <div class="chat-scroll" id="chatScroll">
+      <div id="chatMessages"></div>
+      <div id="chatSuggestions" class="chat-suggestions"></div>
+    </div>
   </div>
 </div>
 
-<!-- CHAT INPUT (shown only on coach tab) -->
+<!-- CHAT INPUT (shown only on coach tab for real users) -->
 <div class="chat-input-area" id="chatInputArea">
   <div class="chat-input-row">
     <textarea id="chatInput" placeholder="Ask your coach anything..." rows="1"
@@ -307,12 +325,28 @@
 <script>
 const params = new URLSearchParams(window.location.search);
 const playerId = params.get('id');
+const isDemo = params.get('demo') === 'true';
 let playerData = null;
 let planData = null;
 let currentTab = 'skills';
 
 // ── INIT ──
 async function init() {
+  if (isDemo) {
+    try {
+      const res = await fetch('/api/demo');
+      const data = await res.json();
+      playerData = data.player;
+      planData = data.plan;
+      renderPlayerHeader();
+      renderAllContent();
+      document.getElementById('demoBanner').style.display = 'block';
+      document.getElementById('refreshBtn').style.display = 'none';
+    } catch (err) {
+      console.error('Demo load error:', err);
+    }
+    return;
+  }
   if (!playerId) { window.location.href = '/'; return; }
   try {
     const res = await fetch(`/api/player/${playerId}`);
@@ -504,8 +538,13 @@ function switchTab(tab) {
   document.getElementById(`tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active');
   currentTab = tab;
   if (tab === 'chat') {
-    document.getElementById('chatInputArea').classList.add('active');
-    scrollChatToBottom();
+    if (isDemo) {
+      document.getElementById('demoChatCta').style.display = 'block';
+      document.getElementById('realChat').style.display = 'none';
+    } else {
+      document.getElementById('chatInputArea').classList.add('active');
+      scrollChatToBottom();
+    }
   }
 }
 
