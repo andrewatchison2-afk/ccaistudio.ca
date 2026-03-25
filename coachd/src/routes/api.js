@@ -84,9 +84,10 @@ router.post('/signup', async (req, res) => {
     }
     const existing = queries.getPlayerByEmail(parent_email);
     if (existing) {
-      // Update with new player info so re-signups reflect the new player
-      queries.updatePlayer(existing.id, { parent_name, player_name, position, age: parseInt(age), level, tryout_date: tryout_date || null, primary_goal });
-      return res.json({ playerId: existing.id });
+      return res.status(409).json({
+        error: `${existing.player_name}'s plan already exists for this email. Check your inbox for the dashboard link, or go to your dashboard directly.`,
+        redirect: `/dashboard?id=${existing.id}`
+      });
     }
     const result = queries.createPlayer({ parent_email, parent_name, player_name, position: position, age: parseInt(age), level, tryout_date: tryout_date || null, primary_goal });
     res.json({ playerId: result.lastInsertRowid });

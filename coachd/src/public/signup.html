@@ -228,13 +228,18 @@
       });
       const data = await res.json();
       clearInterval(msgInterval);
+      if (res.status === 409 && data.redirect) {
+        clearInterval(msgInterval);
+        document.getElementById('loadingText').textContent = 'Account found';
+        document.getElementById('loadingSubtext').innerHTML = `${data.error}<br><br><a href="${data.redirect}" style="color:var(--red-400);font-weight:700">Go to dashboard →</a>`;
+        return;
+      }
       if (!res.ok || data.error) {
         document.getElementById('loadingState').classList.remove('active');
         document.getElementById('step2').classList.add('active');
         alert(data.error || 'Something went wrong. Please try again.');
         return;
       }
-      if (data.redirect) { window.location.href = data.redirect; return; }
       if (data.playerId) {
         // Go to Stripe
         document.getElementById('loadingText').textContent = 'Redirecting to payment...';
