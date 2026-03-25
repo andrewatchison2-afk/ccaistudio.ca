@@ -3,11 +3,11 @@ const { db } = require('./schema');
 module.exports = {
   createPlayer: (data) => {
     const stmt = db.prepare(`
-      INSERT INTO players (parent_email, parent_name, player_name, position, age, level, tryout_date, primary_goal)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO players (parent_email, parent_name, player_name, position, age, level, tryout_date, gender, primary_goal)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     return stmt.run(data.parent_email, data.parent_name, data.player_name,
-      data.position, data.age, data.level, data.tryout_date || null, data.primary_goal);
+      data.position, data.age, data.level, data.tryout_date || null, data.gender || 'boy', data.primary_goal);
   },
   getPlayerById: (id) => db.prepare('SELECT * FROM players WHERE id = ?').get(id),
   getPlayerByEmail: (email) => db.prepare('SELECT * FROM players WHERE parent_email = ?').get(email),
