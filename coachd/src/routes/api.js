@@ -78,7 +78,7 @@ router.get('/demo', (req, res) => {
 // Create player and redirect to Stripe
 router.post('/signup', async (req, res) => {
   try {
-    const { parent_email, parent_name, player_name, position, age, level, tryout_date, primary_goal } = req.body;
+    const { parent_email, parent_name, player_name, position, age, level, tryout_date, gender, primary_goal } = req.body;
     if (!parent_email || !parent_name || !player_name || !position || !age || !level || !primary_goal) {
       return res.status(400).json({ error: 'All required fields must be filled in.' });
     }
@@ -89,7 +89,7 @@ router.post('/signup', async (req, res) => {
         redirect: `/dashboard?id=${existing.id}`
       });
     }
-    const result = queries.createPlayer({ parent_email, parent_name, player_name, position: position, age: parseInt(age), level, tryout_date: tryout_date || null, primary_goal });
+    const result = queries.createPlayer({ parent_email, parent_name, player_name, position, age: parseInt(age), level, tryout_date: tryout_date || null, gender: gender || 'boy', primary_goal });
     res.json({ playerId: result.lastInsertRowid });
   } catch (err) {
     console.error('Signup error:', err);

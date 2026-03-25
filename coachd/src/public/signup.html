@@ -34,6 +34,16 @@
     .loading-sub { font-size: 13px; color: var(--ice-400); margin-top: 8px; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .puck-loading { animation: pulse 1.5s ease-in-out infinite; }
+    .gender-btn {
+      flex: 1; padding: 12px; border-radius: var(--radius-md);
+      background: var(--navy-800); border: 1.5px solid var(--navy-600);
+      color: var(--ice-400); font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .gender-btn.active {
+      background: var(--red-glow); border-color: var(--red-500);
+      color: var(--ice-100);
+    }
   </style>
 </head>
 <body>
@@ -94,6 +104,13 @@
     </div>
     <div class="stack-4">
       <div class="input-group">
+        <label class="input-label">Player</label>
+        <div style="display:flex;gap:10px">
+          <button type="button" id="genderBoy" class="gender-btn active" onclick="setGender('boy')">Boy</button>
+          <button type="button" id="genderGirl" class="gender-btn" onclick="setGender('girl')">Girl</button>
+        </div>
+      </div>
+      <div class="input-group">
         <label class="input-label">Position</label>
         <select id="position">
           <option value="">Select position</option>
@@ -149,6 +166,14 @@
 </div>
 
 <script>
+  let selectedGender = 'boy';
+
+  function setGender(g) {
+    selectedGender = g;
+    document.getElementById('genderBoy').classList.toggle('active', g === 'boy');
+    document.getElementById('genderGirl').classList.toggle('active', g === 'girl');
+  }
+
   function goToStep2() {
     const name = document.getElementById('parent_name').value.trim();
     const email = document.getElementById('parent_email').value.trim();
@@ -221,7 +246,7 @@
           parent_name: document.getElementById('parent_name').value.trim(),
           parent_email: document.getElementById('parent_email').value.trim(),
           player_name: playerName,
-          position, age, level,
+          position, age, level, gender: selectedGender,
           tryout_date: document.getElementById('tryout_date').value || null,
           primary_goal: goal
         })

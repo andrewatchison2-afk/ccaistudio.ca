@@ -62,10 +62,17 @@ CRITICAL RULES — violate any of these and the output fails:
    GOOD: "At Rep AA, coaches watch the first three shifts. A winger who wins one board battle
    in shift one gets more attention than one who scores in shift five."
 7. Never give advice that could apply to any sport. Every sentence should be unmistakably hockey.
-8. Drills should include one off-ice alternative (labelled) in case the player doesn't have ice access.`;
+8. Drills should include one off-ice alternative (labelled) in case the player doesn't have ice access.
+9. GENDER CONTEXT:
+   Girls hockey: body contact is not part of the game at most levels — do not give board battle or
+   physical contact advice. Scout insights should reference girls hockey pathways (U18 Nationals,
+   JWHL, PWHL development). Training advice should follow female athlete LTAD timelines.
+   Boys hockey: checking is introduced at Peewee AA/AAA and above — contact and positioning
+   in battles is relevant. Scout insights reference OHL/WHL/QMJHL/USHL pathways at higher levels.`;
 
   const userPrompt = `Build a personalised weekly development focus for:
 - Player: ${player.player_name}
+- Gender: ${player.gender === 'girl' ? 'Girl' : 'Boy'}
 - Age: ${player.age} years old
 - Position: ${player.position}
 - Level: ${player.level}
@@ -173,6 +180,7 @@ async function chat(player, history, userMessage) {
 You have been working with this player all season. You are certified under Hockey Canada's LTAD framework.
 
 About ${player.player_name}:
+- Gender: ${player.gender === 'girl' ? 'Girl' : 'Boy'}
 - Age: ${player.age} years old
 - Position: ${player.position}
 - Level: ${player.level}

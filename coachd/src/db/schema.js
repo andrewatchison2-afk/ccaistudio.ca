@@ -13,6 +13,7 @@ function initDB() {
       age INTEGER NOT NULL,
       level TEXT NOT NULL,
       tryout_date TEXT,
+      gender TEXT DEFAULT 'boy',
       primary_goal TEXT NOT NULL DEFAULT 'Complete all-around development',
       subscription_status TEXT DEFAULT 'pending',
       stripe_customer_id TEXT,
@@ -34,6 +35,12 @@ function initDB() {
       generated_at TEXT DEFAULT CURRENT_TIMESTAMP
     );
   `);
+  // Migrate: add gender column if it doesn't exist yet
+  const cols = db.prepare("PRAGMA table_info(players)").all().map(c => c.name);
+  if (!cols.includes('gender')) {
+    db.exec("ALTER TABLE players ADD COLUMN gender TEXT DEFAULT 'boy'");
+    console.log('Migration: added gender column');
+  }
   console.log('Database initialised');
 }
 
