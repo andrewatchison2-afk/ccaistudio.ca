@@ -11,6 +11,10 @@ module.exports = {
   },
   getPlayerById: (id) => db.prepare('SELECT * FROM players WHERE id = ?').get(id),
   getPlayerByEmail: (email) => db.prepare('SELECT * FROM players WHERE parent_email = ?').get(email),
+  updatePlayer: (id, data) => {
+    db.prepare(`UPDATE players SET parent_name = ?, player_name = ?, position = ?, age = ?, level = ?, tryout_date = ?, primary_goal = ? WHERE id = ?`)
+      .run(data.parent_name, data.player_name, data.position, data.age, data.tryout_date || null, data.primary_goal, id);
+  },
   updatePlayerStatus: (id, status, stripeCustomerId, stripeSubId) => {
     db.prepare(`UPDATE players SET subscription_status = ?,
       stripe_customer_id = COALESCE(?, stripe_customer_id),
