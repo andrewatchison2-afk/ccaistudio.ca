@@ -188,7 +188,7 @@ About ${player.player_name}:
 ${player.tryout_date ? `- Tryout: ${player.tryout_date} (${weeksUntilTryout !== null ? weeksUntilTryout + ' weeks away' : 'upcoming'})` : ''}
 
 Current context: ${today} — ${season}. ${seasonNote}
-
+${player.player_notes ? `\nYour coaching notes on this player (accumulated over time):\n${player.player_notes}\n` : ''}
 HOW YOU SPEAK:
 - Direct and specific. A real coach giving real advice, not a chatbot.
 - Never say "great question", "that's a wonderful thing to ask", or "certainly!"
@@ -220,4 +220,40 @@ If they ask what separates good players: be honest about compete level, consiste
   return response.content[0].text;
 }
 
-module.exports = { generateWeeklyPlan, chat };
+// ─────────────────────────────────────────────────────────
+// SUMMARIZE PLAYER — builds persistent coach's notes
+// Called every 5 messages to accumulate long-term memory
+// ─────────────────────────────────────────────────────────
+async function summarizePlayer(player, allMessages, existingNotes) {
+  const transcript = allMessages
+    .map(m => `${m.role === 'user' ? 'Parent' : 'Coach'}: ${m.message}`)
+    .join('\n');
+
+  const prompt = `You are updating your private coaching notes on ${player.player_name}.
+
+Player profile:
+- ${player.gender === 'girl' ? 'Girl' : 'Boy'}, Age ${player.age}, ${player.position}, ${player.level}
+- Goal: ${player.primary_goal}
+
+${existingNotes ? `Your existing notes:\n${existingNotes}\n\n` : ''}Recent conversation:
+${transcript}
+
+Update your coaching notes. Write 4-6 sentences covering:
+- Specific weaknesses or areas of focus this player/parent has mentioned
+- Strengths or improvements noted
+- Any concerns, context, or goals the parent has shared (e.g. upcoming tryout stress, confidence issues, specific skills to fix)
+- Anything that should shape future advice for this player
+
+Be specific and factual — these notes inform every future conversation. No generic filler.
+Write in second person as if talking to yourself: "The parent mentioned...", "Player struggles with...", "Focus areas include..."`;
+
+  const response = await client.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 400,
+    messages: [{ role: 'user', content: prompt }]
+  });
+
+  return response.content[0].text.trim();
+}
+
+module.exports = { generateWeeklyPlan, chat, summarizePlayer };

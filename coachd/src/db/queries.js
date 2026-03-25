@@ -33,5 +33,11 @@ module.exports = {
   getRecentMessages: (playerId, limit = 12) => {
     return db.prepare('SELECT * FROM conversations WHERE player_id = ? ORDER BY created_at DESC LIMIT ?').all(playerId, limit).reverse();
   },
+  updatePlayerNotes: (id, notes) => {
+    db.prepare('UPDATE players SET player_notes = ? WHERE id = ?').run(notes, id);
+  },
+  getMessageCount: (playerId) => {
+    return db.prepare('SELECT COUNT(*) as count FROM conversations WHERE player_id = ?').get(playerId).count;
+  },
   getAllPlayers: () => db.prepare('SELECT * FROM players ORDER BY created_at DESC').all(),
 };
