@@ -143,11 +143,20 @@ router.post('/chat', async (req, res) => {
     const { player_id, message } = req.body;
     const player = queries.getPlayerById(player_id);
     if (!player) return res.status(404).json({ error: 'Player not found' });
-    const history = queries.getRecentMessages(player.id);
+    const history = queries.getRecentMessages(player.id, 6);
     const response = await ai.chat(player, history, message);
     queries.saveMessage(player.id, 'user', message);
     queries.saveMessage(player.id, 'assistant', response);
     res.json({ response });
+
+    // Every 5 messages, update the player's long-term coaching notes (fire and forget)
+    const totalMessages = queries.getMessageCount(player.id);
+    if (totalMessages % 5 === 0) {
+      const allMessages = queries.getRecentMessages(player.id, 40);
+      ai.summarizePlayer(player, allMessages, player.player_notes)
+        .then(notes => queries.updatePlayerNotes(player.id, notes))
+        .catch(err => console.error('Player notes update failed:', err));
+    }
   } catch (err) {
     console.error('Chat error:', err);
     res.status(500).json({ error: 'Failed to get response' });

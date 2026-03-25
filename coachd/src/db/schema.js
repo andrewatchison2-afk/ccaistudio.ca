@@ -41,6 +41,10 @@ function initDB() {
     db.exec("ALTER TABLE players ADD COLUMN gender TEXT DEFAULT 'boy'");
     console.log('Migration: added gender column');
   }
+  if (!cols.includes('player_notes')) {
+    db.exec("ALTER TABLE players ADD COLUMN player_notes TEXT DEFAULT NULL");
+    console.log('Migration: added player_notes column');
+  }
   console.log('Database initialised');
 }
 
