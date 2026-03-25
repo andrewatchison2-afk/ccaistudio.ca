@@ -14,9 +14,6 @@ async function createCheckoutSession(playerEmail, playerName, playerId) {
       trial_period_days: 7,
       metadata: { playerId: String(playerId) }
     },
-    payment_settings: {
-      save_default_payment_method: 'on_subscription'
-    },
     metadata: { playerEmail, playerId: String(playerId) },
     success_url: `${process.env.BASE_URL}/dashboard?id=${playerId}&success=true`,
     cancel_url: `${process.env.BASE_URL}/pricing`,
