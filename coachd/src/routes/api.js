@@ -75,10 +75,20 @@ router.get('/demo', (req, res) => {
   });
 });
 
+// Return to existing plan by email
+router.post('/login', (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: 'Email is required.' });
+  const player = queries.getPlayerByEmail(email.trim().toLowerCase());
+  if (!player) return res.status(404).json({ error: 'No plan found for that email. Check the address or start a new plan.' });
+  res.json({ redirect: `/dashboard?id=${player.id}` });
+});
+
 // Create player and redirect to Stripe
 router.post('/signup', async (req, res) => {
   try {
-    const { parent_email, parent_name, player_name, position, age, level, tryout_date, gender, primary_goal } = req.body;
+    const { parent_name, player_name, position, age, level, tryout_date, gender, primary_goal } = req.body;
+    const parent_email = req.body.parent_email?.trim().toLowerCase();
     if (!parent_email || !parent_name || !player_name || !position || !age || !level || !primary_goal) {
       return res.status(400).json({ error: 'All required fields must be filled in.' });
     }
