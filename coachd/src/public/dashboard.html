@@ -13,7 +13,7 @@
     .tab-content { display: none; padding: 20px 20px 0; }
     .tab-content.active { display: block; }
     .main-scroll { overflow-y: auto; height: calc(100vh - 132px); -webkit-overflow-scrolling: touch; }
-    .main-scroll > div { padding-bottom: 80px; }
+    .main-scroll > div { padding-bottom: 100px; }
     .chat-scroll { overflow-y: auto; height: calc(100vh - 196px); padding: 16px 16px 0; -webkit-overflow-scrolling: touch; }
     .player-header {
       padding: 16px 20px;
@@ -201,7 +201,7 @@
 
 <!-- TRIAL BANNER -->
 <div class="trial-banner" id="trialBanner" style="display:none">
-  🏒 Free trial active · <a href="/pricing" id="trialLink">Upgrade to keep your plan →</a>
+  ⚠️ Your plan is paused · <a href="/pricing" id="trialLink">Reactivate to keep training →</a>
 </div>
 
 <!-- DEMO BANNER -->
@@ -214,7 +214,7 @@
 <!-- SKILLS TAB -->
 <div class="tab-content active" id="tab-skills">
   <div class="main-scroll" id="skills-scroll">
-    <div style="padding-bottom: 24px;">
+    <div>
       <!-- Weekly theme card -->
       <div class="focus-card" id="themCard">
         <div class="focus-badge">⚡ THIS WEEK'S FOCUS</div>
@@ -246,7 +246,7 @@
 <!-- TRAINING TAB -->
 <div class="tab-content" id="tab-training">
   <div class="main-scroll" id="training-scroll">
-    <div style="padding-bottom: 24px;">
+    <div>
       <div id="trainingContent">
         <div class="label" style="margin-bottom:12px">OFF-ICE TRAINING</div>
         <div class="card">
@@ -261,7 +261,7 @@
 <!-- NUTRITION TAB -->
 <div class="tab-content" id="tab-nutrition">
   <div class="main-scroll" id="nutrition-scroll">
-    <div style="padding-bottom: 24px;">
+    <div>
       <div id="nutritionContent">
         <div class="label" style="margin-bottom:12px">NUTRITION</div>
         <div class="card">
@@ -374,7 +374,7 @@ function renderPlayerHeader() {
   if (!playerData) return;
   document.getElementById('playerNameHeader').textContent = `${playerData.player_name}'s Plan`;
   document.getElementById('playerMetaHeader').textContent = `${playerData.position} · ${playerData.level} · Age ${playerData.age}`;
-  if (playerData.subscription_status === 'trial') {
+  if (['canceled', 'past_due', 'unpaid'].includes(playerData.subscription_status)) {
     document.getElementById('trialBanner').style.display = 'block';
   }
 }
