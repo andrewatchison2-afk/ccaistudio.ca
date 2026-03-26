@@ -3,6 +3,7 @@ const router = express.Router();
 const { handleWebhook } = require('../services/stripe');
 const queries = require('../db/queries');
 const ai = require('../services/ai');
+const { sendWelcome, sendPlanReady } = require('../services/email');
 
 router.post('/', async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -14,9 +15,25 @@ router.post('/', async (req, res) => {
       const player = queries.getPlayerById(event.playerId);
       if (player) {
         queries.updatePlayerStatus(event.playerId, 'trial', event.stripeCustomerId, event.stripeSubId);
-        // Generate first plan in background
+
+        // Send welcome email immediately
+        sendWelcome({
+          parentName: player.parent_name,
+          playerName: player.player_name,
+          parentEmail: player.parent_email,
+          playerId: player.id
+        }).catch(console.error);
+
+        // Generate first plan, then send "plan ready" email
         ai.generateWeeklyPlan(player).then(plan => {
           queries.saveWeeklyPlan(player.id, plan);
+          sendPlanReady({
+            parentName: player.parent_name,
+            playerName: player.player_name,
+            parentEmail: player.parent_email,
+            playerId: player.id,
+            weeklyTheme: plan?.weekly_theme || null
+          }).catch(console.error);
         }).catch(console.error);
       }
     }
