@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const queries = require('../db/queries');
 const ai = require('../services/ai');
-const { createCheckoutSession } = require('../services/stripe');
+const { createCheckoutSession, createPortalSession } = require('../services/stripe');
 
 // Demo: returns hardcoded sample player + plan (no DB, no auth)
 router.get('/demo', (req, res) => {
@@ -104,6 +104,20 @@ router.post('/signup', async (req, res) => {
   } catch (err) {
     console.error('Signup error:', err);
     res.status(500).json({ error: 'Something went wrong. Please try again.' });
+  }
+});
+
+// Stripe billing portal — cancel, update card, view invoices
+router.get('/billing-portal/:id', async (req, res) => {
+  try {
+    const player = queries.getPlayerById(req.params.id);
+    if (!player) return res.status(404).json({ error: 'Player not found' });
+    if (!player.stripe_customer_id) return res.status(400).json({ error: 'No billing account found.' });
+    const url = await createPortalSession(player.stripe_customer_id);
+    res.json({ url });
+  } catch (err) {
+    console.error('Billing portal error:', err);
+    res.status(500).json({ error: 'Could not open billing portal' });
   }
 });
 

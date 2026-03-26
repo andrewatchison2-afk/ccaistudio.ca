@@ -196,7 +196,9 @@
     <div class="player-name-display" id="playerNameHeader">Loading...</div>
     <div class="player-meta" id="playerMetaHeader">—</div>
   </div>
-  <img src="/logo.svg" style="width:36px;height:36px" alt="Coachd">
+  <button id="billingBtn" onclick="openBillingPortal()" style="display:none;background:transparent;border:1px solid var(--navy-600);border-radius:var(--radius-md);padding:7px 12px;font-size:12px;font-weight:600;color:var(--ice-400);cursor:pointer">
+    Billing
+  </button>
 </div>
 
 <!-- TRIAL BANNER -->
@@ -376,6 +378,30 @@ function renderPlayerHeader() {
   document.getElementById('playerMetaHeader').textContent = `${playerData.position} · ${playerData.level} · Age ${playerData.age}`;
   if (['canceled', 'past_due', 'unpaid'].includes(playerData.subscription_status)) {
     document.getElementById('trialBanner').style.display = 'block';
+  }
+  if (!isDemo && playerData.stripe_customer_id) {
+    document.getElementById('billingBtn').style.display = 'block';
+  }
+}
+
+async function openBillingPortal() {
+  const btn = document.getElementById('billingBtn');
+  btn.textContent = '...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(`/api/billing-portal/${playerId}`);
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert(data.error || 'Could not open billing portal. Email andy@coachdhockey.ca to cancel.');
+      btn.textContent = 'Billing';
+      btn.disabled = false;
+    }
+  } catch (err) {
+    alert('Could not open billing portal. Email andy@coachdhockey.ca to cancel.');
+    btn.textContent = 'Billing';
+    btn.disabled = false;
   }
 }
 

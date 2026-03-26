@@ -47,4 +47,12 @@ function handleWebhook(rawBody, sig) {
   return null;
 }
 
-module.exports = { createCheckoutSession, handleWebhook };
+async function createPortalSession(stripeCustomerId) {
+  const session = await stripe.billingPortal.sessions.create({
+    customer: stripeCustomerId,
+    return_url: `${process.env.BASE_URL}/dashboard`,
+  });
+  return session.url;
+}
+
+module.exports = { createCheckoutSession, createPortalSession, handleWebhook };
