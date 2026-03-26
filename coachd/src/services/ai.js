@@ -138,7 +138,7 @@ Return valid JSON only. No markdown, no preamble, no explanation. Just the raw J
 
   const response = await client.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 2800,
+    max_tokens: 4000,
     system: systemPrompt,
     messages: [{ role: 'user', content: userPrompt }]
   });
@@ -153,7 +153,7 @@ Return valid JSON only. No markdown, no preamble, no explanation. Just the raw J
     // Single retry: ask Claude to fix its own output
     const retryResponse = await client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 2800,
+      max_tokens: 4000,
       system: 'You are a JSON repair tool. Return only valid, complete JSON. No markdown, no explanation.',
       messages: [
         { role: 'user', content: `This JSON is malformed or incomplete. Return the corrected, complete JSON only:\n\n${clean}` }
