@@ -3,6 +3,7 @@ const router = express.Router();
 const { handleWebhook } = require('../services/stripe');
 const queries = require('../db/queries');
 const ai = require('../services/ai');
+const { sendWelcomeEmail } = require('../services/email');
 
 router.post('/', async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -14,9 +15,10 @@ router.post('/', async (req, res) => {
       const player = queries.getPlayerById(event.playerId);
       if (player) {
         queries.updatePlayerStatus(event.playerId, 'trial', event.stripeCustomerId, event.stripeSubId);
-        // Generate first plan in background
+        // Generate first plan and send welcome email in background
         ai.generateWeeklyPlan(player).then(plan => {
           queries.saveWeeklyPlan(player.id, plan);
+          return sendWelcomeEmail(player);
         }).catch(console.error);
       }
     }

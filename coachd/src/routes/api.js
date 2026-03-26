@@ -3,6 +3,7 @@ const router = express.Router();
 const queries = require('../db/queries');
 const ai = require('../services/ai');
 const { createCheckoutSession } = require('../services/stripe');
+const { sendLoginEmail } = require('../services/email');
 
 // Demo: returns hardcoded sample player + plan (no DB, no auth)
 router.get('/demo', (req, res) => {
@@ -81,7 +82,8 @@ router.post('/login', (req, res) => {
   if (!email) return res.status(400).json({ error: 'Email is required.' });
   const player = queries.getPlayerByEmail(email.trim().toLowerCase());
   if (!player) return res.status(404).json({ error: 'No plan found for that email. Check the address or start a new plan.' });
-  res.json({ redirect: `/dashboard?id=${player.id}` });
+  sendLoginEmail(player).catch(err => console.error('Login email error:', err));
+  res.json({ message: 'Check your email — we sent you a link to your dashboard.' });
 });
 
 // Create player and redirect to Stripe
