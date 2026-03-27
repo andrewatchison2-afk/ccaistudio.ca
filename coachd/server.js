@@ -17,14 +17,13 @@ app.use('/', require('./src/routes/pages'));
 app.use('/api', require('./src/routes/api'));
 app.use('/webhook', require('./src/routes/webhook'));
 
-// Init DB
-initDB();
-
+// Init DB then start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`\n🏒 Coachd running`);
-  console.log(`   Local:   http://localhost:${PORT}`);
-  console.log(`\n   To test on your phone:`);
-  console.log(`   Find your IP: run 'ipconfig' (Windows) or 'ifconfig | grep inet' (Mac)`);
-  console.log(`   Open http://[your-ip]:${PORT} on your phone (same WiFi)\n`);
+initDB().then(() => {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Coachd running on port ${PORT}`);
+  });
+}).catch(err => {
+  console.error('Failed to initialise database:', err);
+  process.exit(1);
 });
