@@ -76,10 +76,10 @@ router.get('/demo', (req, res) => {
 });
 
 // Return to existing plan by email
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: 'Email is required.' });
-  const player = queries.getPlayerByEmail(email.trim().toLowerCase());
+  const player = await queries.getPlayerByEmail(email.trim().toLowerCase());
   if (!player) return res.status(404).json({ error: 'No plan found for that email. Check the address or start a new plan.' });
   res.json({ redirect: `/dashboard?id=${player.id}` });
 });
@@ -92,15 +92,19 @@ router.post('/signup', async (req, res) => {
     if (!parent_email || !parent_name || !player_name || !position || !age || !level || !primary_goal) {
       return res.status(400).json({ error: 'All required fields must be filled in.' });
     }
-    const existing = queries.getPlayerByEmail(parent_email);
+    const existing = await queries.getPlayerByEmail(parent_email);
     if (existing) {
       return res.status(409).json({
         error: `${existing.player_name}'s plan already exists for this email. Check your inbox for the dashboard link, or go to your dashboard directly.`,
         redirect: `/dashboard?id=${existing.id}`
       });
     }
-    const result = queries.createPlayer({ parent_email, parent_name, player_name, position, age: parseInt(age), level, tryout_date: tryout_date || null, gender: gender || 'boy', primary_goal });
-    res.json({ playerId: result.lastInsertRowid });
+    const player = await queries.createPlayer({
+      parent_email, parent_name, player_name, position,
+      age: parseInt(age), level, tryout_date: tryout_date || null,
+      gender: gender || 'boy', primary_goal
+    });
+    res.json({ playerId: player.id });
   } catch (err) {
     console.error('Signup error:', err);
     res.status(500).json({ error: 'Something went wrong. Please try again.' });
@@ -110,7 +114,7 @@ router.post('/signup', async (req, res) => {
 // Stripe billing portal — cancel, update card, view invoices
 router.get('/billing-portal/:id', async (req, res) => {
   try {
-    const player = queries.getPlayerById(req.params.id);
+    const player = await queries.getPlayerById(req.params.id);
     if (!player) return res.status(404).json({ error: 'Player not found' });
     if (!player.stripe_customer_id) return res.status(400).json({ error: 'No billing account found.' });
     const url = await createPortalSession(player.stripe_customer_id);
@@ -124,7 +128,7 @@ router.get('/billing-portal/:id', async (req, res) => {
 // Get checkout URL
 router.get('/checkout/:id', async (req, res) => {
   try {
-    const player = queries.getPlayerById(req.params.id);
+    const player = await queries.getPlayerById(req.params.id);
     if (!player) return res.status(404).json({ error: 'Player not found' });
     const url = await createCheckoutSession(player.parent_email, player.parent_name, player.id);
     res.json({ url });
@@ -137,9 +141,9 @@ router.get('/checkout/:id', async (req, res) => {
 // Get player + plan
 router.get('/player/:id', async (req, res) => {
   try {
-    const player = queries.getPlayerById(req.params.id);
+    const player = await queries.getPlayerById(req.params.id);
     if (!player) return res.status(404).json({ error: 'Player not found' });
-    const plan = queries.getLatestPlan(player.id);
+    const plan = await queries.getLatestPlan(player.id);
     res.json({ player, plan });
   } catch (err) {
     res.status(500).json({ error: 'Failed to load player data' });
@@ -150,10 +154,10 @@ router.get('/player/:id', async (req, res) => {
 router.post('/plan/generate', async (req, res) => {
   try {
     const { player_id } = req.body;
-    const player = queries.getPlayerById(player_id);
+    const player = await queries.getPlayerById(player_id);
     if (!player) return res.status(404).json({ error: 'Player not found' });
     const plan = await ai.generateWeeklyPlan(player);
-    queries.saveWeeklyPlan(player.id, plan);
+    await queries.saveWeeklyPlan(player.id, plan);
     res.json({ plan });
   } catch (err) {
     console.error('Plan generation error:', err);
@@ -165,18 +169,18 @@ router.post('/plan/generate', async (req, res) => {
 router.post('/chat', async (req, res) => {
   try {
     const { player_id, message } = req.body;
-    const player = queries.getPlayerById(player_id);
+    const player = await queries.getPlayerById(player_id);
     if (!player) return res.status(404).json({ error: 'Player not found' });
-    const history = queries.getRecentMessages(player.id, 6);
+    const history = await queries.getRecentMessages(player.id, 6);
     const response = await ai.chat(player, history, message);
-    queries.saveMessage(player.id, 'user', message);
-    queries.saveMessage(player.id, 'assistant', response);
+    await queries.saveMessage(player.id, 'user', message);
+    await queries.saveMessage(player.id, 'assistant', response);
     res.json({ response });
 
     // Every 5 messages, update the player's long-term coaching notes (fire and forget)
-    const totalMessages = queries.getMessageCount(player.id);
+    const totalMessages = await queries.getMessageCount(player.id);
     if (totalMessages % 5 === 0) {
-      const allMessages = queries.getRecentMessages(player.id, 40);
+      const allMessages = await queries.getRecentMessages(player.id, 40);
       ai.summarizePlayer(player, allMessages, player.player_notes)
         .then(notes => queries.updatePlayerNotes(player.id, notes))
         .catch(err => console.error('Player notes update failed:', err));

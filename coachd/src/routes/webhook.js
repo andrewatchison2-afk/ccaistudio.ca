@@ -12,9 +12,9 @@ router.post('/', async (req, res) => {
     if (!event) return res.json({ received: true });
 
     if (event.type === 'activated') {
-      const player = queries.getPlayerById(event.playerId);
+      const player = await queries.getPlayerById(event.playerId);
       if (player) {
-        queries.updatePlayerStatus(event.playerId, 'trial', event.stripeCustomerId, event.stripeSubId);
+        await queries.updatePlayerStatus(event.playerId, 'trial', event.stripeCustomerId, event.stripeSubId);
 
         // Send welcome email immediately
         sendWelcome({
@@ -25,8 +25,8 @@ router.post('/', async (req, res) => {
         }).catch(console.error);
 
         // Generate first plan, then send "plan ready" email
-        ai.generateWeeklyPlan(player).then(plan => {
-          queries.saveWeeklyPlan(player.id, plan);
+        ai.generateWeeklyPlan(player).then(async plan => {
+          await queries.saveWeeklyPlan(player.id, plan);
           sendPlanReady({
             parentName: player.parent_name,
             playerName: player.player_name,
@@ -39,8 +39,8 @@ router.post('/', async (req, res) => {
     }
 
     if (event.type === 'cancelled') {
-      const player = queries.getPlayerByEmail(event.stripeCustomerId);
-      if (player) queries.updatePlayerStatus(player.id, 'cancelled', null, null);
+      const player = await queries.getPlayerByEmail(event.stripeCustomerId);
+      if (player) await queries.updatePlayerStatus(player.id, 'cancelled', null, null);
     }
 
     res.json({ received: true });
