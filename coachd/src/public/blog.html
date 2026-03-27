@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Blog — Coachd</title>
+  <meta name="description" content="Hockey development advice for minor hockey parents and players — from the Coachd team.">
+  <meta name="theme-color" content="#040C1A">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/design.css">
+  <style>
+    .blog-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--navy-700);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .blog-header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex: 1;
+    }
+    .blog-header-logo img { width: 28px; height: 28px; }
+    .blog-header-wordmark {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      color: var(--ice-400);
+    }
+    .blog-header-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .blog-header-nav a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ice-400);
+      text-decoration: none;
+    }
+    .blog-header-nav a:hover { color: var(--ice-100); }
+    .blog-header-nav a.active { color: var(--ice-100); }
+    .blog-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+    .blog-intro {
+      margin-bottom: 56px;
+    }
+    .blog-intro h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 8vw, 52px);
+      line-height: 1;
+      color: var(--ice-100);
+      margin-bottom: 12px;
+    }
+    .blog-intro p {
+      font-size: 16px;
+      color: var(--ice-400);
+      line-height: 1.6;
+    }
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .post-item {
+      display: block;
+      text-decoration: none;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--navy-700);
+    }
+    .post-item:first-child {
+      border-top: 1px solid var(--navy-700);
+    }
+    .post-item:hover .post-title { color: var(--red-400); }
+    .post-meta {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ice-600);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .post-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 5vw, 28px);
+      line-height: 1.1;
+      color: var(--ice-100);
+      margin-bottom: 10px;
+      transition: color 0.15s ease;
+    }
+    .post-excerpt {
+      font-size: 15px;
+      color: var(--ice-400);
+      line-height: 1.6;
+    }
+    .post-read-more {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--red-400);
+    }
+    footer {
+      border-top: 1px solid var(--navy-700);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--ice-600);
+    }
+    footer .footer-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    footer img { width: 28px; height: 28px; }
+    footer .footer-wordmark { font-family: var(--font-display); font-size: 18px; letter-spacing: 0.2em; color: var(--ice-400); }
+  </style>
+</head>
+<body>
+
+<header class="blog-header">
+  <a href="/" class="blog-header-logo">
+    <img src="/logo.svg" alt="Coachd">
+    <span class="blog-header-wordmark">COACHD</span>
+  </a>
+  <nav class="blog-header-nav">
+    <a href="/">Home</a>
+    <a href="/blog" class="active">Blog</a>
+    <a href="/signup" class="btn btn-primary btn-sm" style="padding:8px 16px;font-size:12px">Start Free →</a>
+  </nav>
+</header>
+
+<div class="blog-wrap">
+  <div class="blog-intro">
+    <div class="label" style="margin-bottom:16px">Coachd Blog</div>
+    <h1>HOCKEY DEVELOPMENT<br>FOR FAMILIES</h1>
+    <p>What coaches watch. How players improve. Practical advice for every minor hockey family.</p>
+  </div>
+
+  <div class="posts-list">
+    <a href="/blog/how-to-prepare-for-minor-hockey-tryouts" class="post-item">
+      <div class="post-meta">March 2026 &middot; 8 min read &middot; Coachd</div>
+      <div class="post-title">How to Prepare for Minor Hockey Tryouts (What Actually Gets Noticed)</div>
+      <div class="post-excerpt">What minor hockey coaches actually evaluate at tryouts — and a 4-week preparation plan covering skating, off-ice training, and nutrition.</div>
+      <span class="post-read-more">Read article →</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <img src="/logo.svg" alt="Coachd">
+    <span class="footer-wordmark">COACHD</span>
+  </div>
+  <div style="margin-bottom:8px">© 2026 Coachd · Built in Edmonton, Alberta for hockey families everywhere</div>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <a href="/blog" style="color:var(--ice-600)">Blog</a>
+    <a href="/pricing" style="color:var(--ice-600)">Pricing</a>
+    <a href="/privacy" style="color:var(--ice-600)">Privacy</a>
+    <a href="/terms" style="color:var(--ice-600)">Terms</a>
+    <a href="mailto:andy@coachdhockey.ca" style="color:var(--ice-600)">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
