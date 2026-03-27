@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#040C1A">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/css/design.css">
+  <script src="/js/analytics.js"></script>
   <style>
     body { min-height: 100vh; display: flex; flex-direction: column; }
     .signup-header {
@@ -197,6 +198,7 @@
       el.classList.add('shake', 'error'); setTimeout(() => el.classList.remove('shake', 'error'), 500);
       return;
     }
+    window.coachd && window.coachd.track('signup_step1_complete');
     document.getElementById('playerNameDisplay').textContent = playerName;
     document.getElementById('step1').classList.remove('active');
     document.getElementById('step2').classList.add('active');
@@ -226,6 +228,7 @@
       return;
     }
     const playerName = document.getElementById('player_name').value.trim();
+    window.coachd && window.coachd.track('signup_step2_complete', { position: document.getElementById('position').value, level: document.getElementById('level').value });
     // Show loading
     document.getElementById('step2').classList.remove('active');
     document.getElementById('loadingState').classList.add('active');
