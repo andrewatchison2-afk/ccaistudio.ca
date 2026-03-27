@@ -365,6 +365,7 @@ async function init() {
     if (planData) {
       renderAllContent();
     } else {
+      document.getElementById('weeklyTheme').textContent = 'Building your plan... this takes about 30 seconds.';
       await generatePlan();
     }
   } catch (err) {
