@@ -1,5 +1,5 @@
 // ─── PLACEHOLDER CONFIG ──────────────────────────────────────────────────────
-var GA4_MEASUREMENT_ID = 'G-XXXXXXXXXX';   // Replace with your GA4 Measurement ID
+var GA4_MEASUREMENT_ID = 'G-LP3FEVTPF1';   // Google Analytics 4
 var CLARITY_PROJECT_ID = 'XXXXXXXXXX';     // Replace with your Clarity Project ID
 // ─────────────────────────────────────────────────────────────────────────────
 
