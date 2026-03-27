@@ -413,10 +413,18 @@ async function generatePlan() {
       body: JSON.stringify({ player_id: playerId })
     });
     const data = await res.json();
+    if (!res.ok || !data.plan) {
+      const msg = data.error || 'Plan generation failed.';
+      document.getElementById('weeklyTheme').textContent = msg;
+      document.getElementById('refreshBtn').style.display = 'flex';
+      console.error('Plan error:', msg);
+      return;
+    }
     planData = { plan: data.plan };
     renderAllContent();
   } catch (err) {
-    document.getElementById('weeklyTheme').textContent = 'Failed to load plan. Tap refresh.';
+    console.error('generatePlan error:', err);
+    document.getElementById('weeklyTheme').textContent = 'Could not connect. Tap refresh to try again.';
     document.getElementById('refreshBtn').style.display = 'flex';
   }
 }
