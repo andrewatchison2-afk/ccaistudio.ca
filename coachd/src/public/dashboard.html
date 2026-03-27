@@ -206,7 +206,7 @@
   ⚠️ Your plan is paused · <a href="/pricing" id="trialLink">Reactivate to keep training →</a>
 </div>
 
-<!-- DEMO BANNER -->
+<!-- DEMO BANNER (only shown on Coach tab in demo mode) -->
 <div id="demoBanner" style="display:none;background:rgba(230,57,70,0.1);border-bottom:1px solid rgba(230,57,70,0.25);padding:10px 20px;text-align:center;font-size:13px;font-weight:600;color:var(--ice-200)">
   👀 Sample plan — <a href="/signup" style="color:var(--red-400);text-decoration:none">Start your free week to get your player's real plan →</a>
 </div>
@@ -219,7 +219,10 @@
     <div>
       <!-- Weekly theme card -->
       <div class="focus-card" id="themCard">
-        <div class="focus-badge">⚡ THIS WEEK'S FOCUS</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+          <div class="focus-badge" style="margin-bottom:0">⚡ THIS WEEK'S FOCUS</div>
+          <div id="weekLabel" style="font-size:11px;color:var(--ice-600);font-weight:600;letter-spacing:0.04em"></div>
+        </div>
         <div class="weekly-theme" id="weeklyTheme">
           <div class="skeleton skeleton-line" style="width:80%"></div>
         </div>
@@ -278,14 +281,31 @@
 <!-- COACH CHAT TAB -->
 <div class="tab-content" id="tab-chat">
   <!-- Demo CTA (shown in demo mode) -->
-  <div id="demoChatCta" style="display:none;padding:40px 24px;text-align:center">
-    <div style="font-size:48px;margin-bottom:16px">💬</div>
-    <div style="font-family:var(--font-display);font-size:26px;margin-bottom:12px">Your AI Coach</div>
-    <div style="font-size:14px;color:var(--ice-400);line-height:1.6;margin-bottom:28px;max-width:280px;margin-left:auto;margin-right:auto">
-      Ask anything — what scouts watch for, specific drills, pre-game prep. Your coach knows your player's position, age, and level.
+  <div id="demoChatCta" style="display:none;padding:20px 20px 40px">
+    <!-- Sample conversation -->
+    <div style="margin-bottom:28px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--ice-600);text-transform:uppercase;margin-bottom:14px">SAMPLE CONVERSATION</div>
+      <div class="chat-message" style="margin-bottom:12px">
+        <div class="chat-bubble user">What do coaches watch for in a 12-year-old center at tryouts?</div>
+      </div>
+      <div class="chat-message" style="margin-bottom:0">
+        <div class="chat-bubble ai">At Rep AA, coaches watch the first three shifts harder than the rest of the game combined. For a 12-year-old center, here's what actually matters:<br><br>
+        <strong>Skating first.</strong> Not speed — edges. Can he stop both ways cleanly and explode out? Centers who can't pivot on their weak side get exposed in D-zone coverage.<br><br>
+        <strong>Compete level at the dot.</strong> Faceoffs show character immediately. Even if he loses, does he battle for the puck after? Coaches notice who chases pucks into corners.<br><br>
+        <strong>Hockey sense without the puck.</strong> Where does he position himself when a teammate has it? Centers who find open ice and give options are rare at this age — they get noticed.<br><br>
+        At 12, coaches aren't expecting polished play. They're drafting players they believe they can develop. Show compete, skating, and awareness and you're already ahead of 80% of the kids in the building.</div>
+      </div>
     </div>
-    <a href="/signup" class="btn btn-primary btn-lg" style="display:block;max-width:300px;margin:0 auto">START FREE WEEK TO UNLOCK →</a>
-    <p style="font-size:12px;color:var(--ice-600);margin-top:12px">7 days free · CA$19.99/month after · Cancel anytime</p>
+    <!-- Lock / CTA -->
+    <div style="text-align:center;padding:24px;background:rgba(4,12,26,0.6);border:1px solid var(--navy-600);border-radius:var(--radius-lg)">
+      <div style="font-size:32px;margin-bottom:12px">💬</div>
+      <div style="font-family:var(--font-display);font-size:22px;margin-bottom:8px">Your AI Coach</div>
+      <div style="font-size:13px;color:var(--ice-400);line-height:1.6;margin-bottom:20px">
+        Ask anything — specific to your player's position, age, and level.
+      </div>
+      <a href="/signup" class="btn btn-primary" style="display:block;max-width:280px;margin:0 auto">START FREE WEEK TO UNLOCK →</a>
+      <p style="font-size:12px;color:var(--ice-600);margin-top:10px">7 days free · CA$19.99/month after · Cancel anytime</p>
+    </div>
   </div>
   <!-- Real chat (hidden in demo mode) -->
   <div id="realChat">
@@ -343,13 +363,8 @@ async function init() {
       planData = data.plan;
       renderPlayerHeader();
       renderAllContent();
-      document.getElementById('demoBanner').style.display = 'block';
+      renderWeekBadge(null);
       document.getElementById('refreshBtn').style.display = 'none';
-      // Shrink scroll areas to account for the demo banner height
-      const bannerH = document.getElementById('demoBanner').offsetHeight;
-      document.querySelectorAll('.main-scroll').forEach(el => {
-        el.style.height = `calc(100vh - ${132 + bannerH}px)`;
-      });
     } catch (err) {
       console.error('Demo load error:', err);
     }
@@ -364,6 +379,7 @@ async function init() {
     renderPlayerHeader();
     if (planData) {
       renderAllContent();
+      renderWeekBadge(planData.generated_at);
     } else {
       document.getElementById('weeklyTheme').textContent = 'Building your plan... this takes about 30 seconds.';
       await generatePlan();
@@ -423,6 +439,7 @@ async function generatePlan() {
     }
     planData = { plan: data.plan };
     renderAllContent();
+    renderWeekBadge(null);
   } catch (err) {
     console.error('generatePlan error:', err);
     document.getElementById('weeklyTheme').textContent = 'Could not connect. Tap refresh to try again.';
@@ -571,6 +588,21 @@ function renderChatSuggestions() {
 }
 
 // ── TAB SWITCHING ──
+function renderWeekBadge(generatedAt) {
+  const el = document.getElementById('weekLabel');
+  if (!el) return;
+  const start = generatedAt ? new Date(generatedAt) : new Date();
+  const end = new Date(start);
+  end.setDate(end.getDate() + 6);
+  const nextPlan = new Date(start);
+  nextPlan.setDate(nextPlan.getDate() + 7);
+  const today = new Date();
+  const daysLeft = Math.max(0, Math.ceil((nextPlan - today) / (1000 * 60 * 60 * 24)));
+  const fmt = d => d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+  const nextLabel = isDemo ? '' : ` · Next in ${daysLeft}d`;
+  el.textContent = `${fmt(start)} – ${fmt(end)}${nextLabel}`;
+}
+
 function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
@@ -580,12 +612,22 @@ function switchTab(tab) {
   currentTab = tab;
   if (tab === 'chat') {
     if (isDemo) {
+      document.getElementById('demoBanner').style.display = 'block';
+      const bannerH = document.getElementById('demoBanner').offsetHeight;
+      document.querySelectorAll('.main-scroll').forEach(el => {
+        el.style.height = `calc(100vh - ${132 + bannerH}px)`;
+      });
       document.getElementById('demoChatCta').style.display = 'block';
       document.getElementById('realChat').style.display = 'none';
     } else {
       document.getElementById('chatInputArea').classList.add('active');
       scrollChatToBottom();
     }
+  } else if (isDemo) {
+    document.getElementById('demoBanner').style.display = 'none';
+    document.querySelectorAll('.main-scroll').forEach(el => {
+      el.style.height = 'calc(100vh - 132px)';
+    });
   }
 }
 
