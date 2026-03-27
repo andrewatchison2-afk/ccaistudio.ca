@@ -1,6 +1,6 @@
 // ─── PLACEHOLDER CONFIG ──────────────────────────────────────────────────────
 var GA4_MEASUREMENT_ID = 'G-LP3FEVTPF1';   // Google Analytics 4
-var CLARITY_PROJECT_ID = 'XXXXXXXXXX';     // Replace with your Clarity Project ID
+var CLARITY_PROJECT_ID = 'w2iv6bv2l1';     // Microsoft Clarity
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Microsoft Clarity ────────────────────────────────────────────────────────
