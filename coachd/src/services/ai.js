@@ -78,6 +78,7 @@ CRITICAL RULES — violate any of these and the output fails:
 - Level: ${player.level}
 - Primary goal: ${player.primary_goal}
 ${player.tryout_date ? `- Tryout date: ${player.tryout_date} (${weeksUntilTryout} weeks away)` : '- No upcoming tryout specified'}
+${player.dietary_notes ? `- Dietary notes from parent: ${player.dietary_notes}` : ''}
 
 Return valid JSON only. No markdown, no preamble, no explanation. Just the raw JSON object:
 {
@@ -133,6 +134,7 @@ Return valid JSON only. No markdown, no preamble, no explanation. Just the raw J
     "daily_habit": "One small daily change with a measurable hockey benefit.",
     "avoid_this": "One specific thing that hurts performance. Concrete, not preachy."
   },
+${player.dietary_notes ? `IMPORTANT — DIETARY REQUIREMENT: This player's parent has provided the following dietary notes: "${player.dietary_notes}". You must adjust ALL nutrition guidance to account for this. Avoid any foods, ingredients, or advice that conflicts with this condition. Do not suggest generic alternatives — give specific, practical guidance that works within this restriction. Every nutrition field above must reflect this constraint.` : ''}
   "weeks_until_tryout": ${weeksUntilTryout || null}
 }`;
 
