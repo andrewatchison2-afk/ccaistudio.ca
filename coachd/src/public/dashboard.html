@@ -543,7 +543,7 @@ function renderTraining(t) {
 
 function renderNutrition(n) {
   if (!n) return;
-  let html = `
+  let html = `<p style="font-size:11px;color:var(--ice-600);line-height:1.55;margin-bottom:16px">Nutrition guidance is general and based on your player's position, age, and level. It does not account for medical conditions, allergies, or dietary restrictions. Always consult a healthcare professional for specific dietary needs.</p>
     <div class="card" style="margin-bottom:16px">
       <div class="label" style="margin-bottom:6px">Nutrition Focus</div>
       <div style="font-weight:800;font-size:18px;margin-bottom:8px">${n.title}</div>

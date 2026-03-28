@@ -2,11 +2,11 @@ const { pool } = require('./schema');
 
 async function createPlayer(data) {
   const { rows } = await pool.query(
-    `INSERT INTO players (parent_email, parent_name, player_name, position, age, level, tryout_date, gender, primary_goal)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id`,
+    `INSERT INTO players (parent_email, parent_name, player_name, position, age, level, tryout_date, gender, primary_goal, dietary_notes)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING id`,
     [data.parent_email, data.parent_name, data.player_name,
      data.position, data.age, data.level, data.tryout_date || null,
-     data.gender || 'boy', data.primary_goal]
+     data.gender || 'boy', data.primary_goal, data.dietary_notes || null]
   );
   return rows[0];
 }
