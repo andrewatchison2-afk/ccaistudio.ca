@@ -41,6 +41,8 @@ async function initDB() {
       generated_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+  // Safe migration for existing installs
+  await pool.query(`ALTER TABLE players ADD COLUMN IF NOT EXISTS dietary_notes TEXT DEFAULT NULL`);
   console.log('Database initialised');
 }
 
