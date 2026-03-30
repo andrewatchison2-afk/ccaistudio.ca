@@ -14,9 +14,9 @@ var COACHD_VIDEO_LIBRARY = {
 
   // ── OFF-ICE EXERCISES ─────────────────────────────────────────────────────
 
-  'lateral banded walks':       null,  // search: "lateral band walks exercise tutorial"
-  'banded lateral walks':       null,  // search: "lateral band walks exercise tutorial"
-  'lateral band walks':         null,  // search: "lateral band walks exercise tutorial"
+  'lateral banded walks':       'HW9xLHrLhxI',
+  'banded lateral walks':       'HW9xLHrLhxI',
+  'lateral band walks':         'HW9xLHrLhxI',
 
   'skater jumps':               null,  // search: "skater jumps lateral bounds exercise"
   'skater hops':                null,  // search: "skater jumps lateral bounds exercise"
