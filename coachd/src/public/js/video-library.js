@@ -14,67 +14,81 @@ var COACHD_VIDEO_LIBRARY = {
 
   // ── OFF-ICE EXERCISES ─────────────────────────────────────────────────────
 
-  'lateral banded walks':       null,  // search: "lateral band walks exercise tutorial"
-  'banded lateral walks':       null,  // search: "lateral band walks exercise tutorial"
-  'lateral band walks':         null,  // search: "lateral band walks exercise tutorial"
+  'lateral banded walks':       'HW9xLHrLhxI',
+  'banded lateral walks':       'HW9xLHrLhxI',
+  'lateral band walks':         'HW9xLHrLhxI',
 
-  'skater jumps':               null,  // search: "skater jumps lateral bounds exercise"
-  'skater hops':                null,  // search: "skater jumps lateral bounds exercise"
-  'lateral bounds':             null,  // search: "skater jumps lateral bounds exercise"
+  'skater jumps':               'Rs1zxDgyUXA',
+  'skater hops':                'Rs1zxDgyUXA',
+  'lateral bounds':             'Rs1zxDgyUXA',
 
-  'single-leg box jumps':       null,  // search: "single leg box jump tutorial"
-  'single leg box jumps':       null,  // search: "single leg box jump tutorial"
-  'box jumps':                  null,  // search: "box jump tutorial plyometric"
+  'single-leg box jumps':       'XRVSx_xr1_M',
+  'single leg box jumps':       'XRVSx_xr1_M',
+  'box jumps':                  'XRVSx_xr1_M',
 
-  'hip flexor stretch':         null,  // search: "hip flexor stretch tutorial"
-  'hamstring stretch':          null,  // search: "hamstring stretch tutorial"
-  'glute bridges':              null,  // search: "glute bridge exercise tutorial"
-  'single-leg glute bridge':    null,  // search: "single leg glute bridge tutorial"
-  'wall sits':                  null,  // search: "wall sit exercise tutorial"
-  'squat jumps':                null,  // search: "squat jump plyometric tutorial"
-  'jump squats':                null,  // search: "squat jump plyometric tutorial"
-  'lunges':                     null,  // search: "lunge exercise tutorial hockey"
-  'lateral lunges':             null,  // search: "lateral lunge tutorial"
-  'split squats':               null,  // search: "split squat tutorial"
-  'bulgarian split squats':     null,  // search: "bulgarian split squat tutorial"
-  'resistance band squats':     null,  // search: "resistance band squat tutorial"
-  'plank':                      null,  // search: "plank exercise tutorial core"
-  'side plank':                 null,  // search: "side plank tutorial core"
-  'dead bugs':                  null,  // search: "dead bug exercise core tutorial"
-  'mountain climbers':          null,  // search: "mountain climbers exercise tutorial"
-  'agility ladder':             null,  // search: "agility ladder drills hockey"
-  'dot drills':                 null,  // search: "dot drills hockey agility"
-  'stickhandling':              null,  // search: "hockey stickhandling drills off ice"
-  'wrist shots':                null,  // search: "hockey wrist shot technique"
+  'hip flexor stretch':         '2PNT-FFKLgY',
+  'hamstring stretch':          'T_l0AyZywjU',
+  'glute bridges':              'X_IGw8U_e38',
+  'single-leg glute bridge':    'n1IZ168x2Bw',
+  'single leg glute bridge':    'n1IZ168x2Bw',
+  'wall sits':                  'mDdLC-yKudY',
+  'wall sit':                   'mDdLC-yKudY',
+  'squat jumps':                '5xv0DKqe5XQ',
+  'jump squats':                '5xv0DKqe5XQ',
+  'lunges':                     'R0xGkawNULw',
+  'lateral lunges':             'TnOkq6KfHsM',
+  'split squats':               'SGHnCftrZkA',
+  'bulgarian split squats':     'Fmjj7wFJWRE',
+  'resistance band squats':     'ExfeIVSC1HU',
+  'plank':                      'pvIjsG5Svck',
+  'side plank':                 'N_s9em1xTqU',
+  'dead bugs':                  'Aoipu_fl3HA',
+  'dead bug':                   'Aoipu_fl3HA',
+  'mountain climbers':          'hZb6jTbCLeE',
+  'mountain climber':           'hZb6jTbCLeE',
+  'agility ladder':             '5pQ0M0-DQ8o',
+  'dot drills':                 'EXh_DLRSs8s',
+  'stickhandling':              'HylGXDf8l2g',
+  'wrist shots':                'HQY14pYYWuQ',
+  'wrist shot':                 'HQY14pYYWuQ',
 
   // ── ON-ICE SKILLS ─────────────────────────────────────────────────────────
 
-  'inside-outside edge slalom': null,  // search: "hockey edge work drills inside outside"
-  'edge slalom':                null,  // search: "hockey edge work drills inside outside"
-  'edge control':               null,  // search: "hockey edge control drills"
+  'inside-outside edge slalom': 'vvK7vDyt_Nk',
+  'edge slalom':                'vvK7vDyt_Nk',
+  'edge control':               'MPrerhyHllA',
 
-  'stop-and-explode starts':    null,  // search: "hockey stop and start skating drill"
-  'stop and explode':           null,  // search: "hockey stop and start skating drill"
-  'quick starts':               null,  // search: "hockey explosive starts skating"
-  'first step quickness':       null,  // search: "hockey first step quickness skating"
+  'stop-and-explode starts':    '0S9WY7TDQ6s',
+  'stop and explode':           '0S9WY7TDQ6s',
+  'quick starts':               '2gjDjiWysok',
+  'explosive starts':           '2gjDjiWysok',
+  'first step quickness':       'hk6L2a8ORgQ',
 
-  'c-cuts':                     null,  // search: "hockey c-cut skating drill"
+  'c-cuts':                     'J31_vNGLhEY',
+  'c cuts':                     'J31_vNGLhEY',
   'sculling':                   null,  // search: "hockey sculling skating drill"
-  'crossovers':                 null,  // search: "hockey crossover skating drill"
-  'backwards skating':          null,  // search: "hockey backwards skating drill"
-  'pivots':                     null,  // search: "hockey pivot skating drill"
-  'tight turns':                null,  // search: "hockey tight turn skating drill"
-  'mohawk turns':               null,  // search: "hockey mohawk turn skating"
-  'power skating':              null,  // search: "hockey power skating drills"
+  'crossovers':                 '72V8Rjg9HCE',
+  'backwards skating':          'iTbZ8ANiNjs',
+  'backward skating':           'iTbZ8ANiNjs',
+  'pivots':                     'hYwW6-tM20s',
+  'pivot':                      'hYwW6-tM20s',
+  'tight turns':                'o7TrmZqMNLE',
+  'tight turn':                 'o7TrmZqMNLE',
+  'mohawk turns':               '01vNhb8N6o8',
+  'power skating':              '6vwJY204dMM',
 
-  'puck protection':            null,  // search: "hockey puck protection drill"
-  'stickhandling in tight spaces': null, // search: "hockey stickhandling tight spaces"
-  'shooting off the pass':      null,  // search: "hockey shooting off pass drill"
-  'backhand shots':             null,  // search: "hockey backhand shot technique"
-  'one-timers':                 null,  // search: "hockey one timer shooting drill"
-  'faceoffs':                   null,  // search: "hockey faceoff technique drill"
-  'gap control':                null,  // search: "hockey gap control defense drill"
-  'angling':                    null,  // search: "hockey angling defense technique"
+  'puck protection':            'aS3K2ElKo7g',
+  'stickhandling in tight spaces': 'x16lZM7wJZs',
+  'shooting off the pass':      'PCgQecgPwq0',
+  'backhand shots':             'SzDwv42yo1w',
+  'backhand shot':              'SzDwv42yo1w',
+  'one-timers':                 'ontouu7GfS4',
+  'one timers':                 'ontouu7GfS4',
+  'one-timer':                  'ontouu7GfS4',
+  'faceoffs':                   'SA9J-J6QMuQ',
+  'faceoff':                    'SA9J-J6QMuQ',
+  'gap control':                'me2WaE5IoTk',
+  'angling':                    'J60uvvgMZcY',
 };
 
 // ─── MATCHING LOGIC ──────────────────────────────────────────────────────────
