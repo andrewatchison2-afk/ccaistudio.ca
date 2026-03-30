@@ -15,6 +15,7 @@ async function createCheckoutSession(playerEmail, playerName, playerId) {
       metadata: { playerId: String(playerId) }
     },
     metadata: { playerEmail, playerId: String(playerId) },
+    allow_promotion_codes: true,
     success_url: `${process.env.BASE_URL}/dashboard?id=${playerId}&success=true`,
     cancel_url: `${process.env.BASE_URL}/pricing`,
   });
