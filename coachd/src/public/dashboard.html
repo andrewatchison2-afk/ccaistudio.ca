@@ -10,6 +10,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/css/design.css">
   <script src="/js/analytics.js"></script>
+  <script src="/js/video-library.js"></script>
   <style>
     .tab-content { display: none; padding: 20px 20px 0; }
     .tab-content.active { display: block; }
@@ -167,6 +168,8 @@
       -webkit-tap-highlight-color: transparent;
     }
     .chat-suggestion:active { background: var(--navy-700); border-color: var(--red-500); }
+    .video-embed { margin-top: 12px; border-radius: var(--radius-md); overflow: hidden; background: #000; }
+    .video-embed iframe { display: block; width: 100%; aspect-ratio: 16/9; border: none; }
     .skeleton-line { height: 16px; border-radius: 8px; margin-bottom: 10px; }
     .skeleton-line.short { width: 60%; }
     .skeleton-line.medium { width: 80%; }
@@ -496,6 +499,7 @@ function renderSkills(s) {
         ${d.what_you_need ? `<div class="drill-field"><div class="drill-field-label">What you need</div><div class="drill-field-value">${d.what_you_need}</div></div>` : ''}
         <div class="drill-field"><div class="drill-field-label">How to do it</div><div class="drill-field-value">${d.execution}</div></div>
         ${d.what_to_feel ? `<div class="highlight-blue" style="margin-top:8px"><div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:4px">What to feel</div><div style="font-size:13px">${d.what_to_feel}</div></div>` : ''}
+        ${videoEmbed(d.name)}
       </div>
     </div>`;
   });
@@ -531,6 +535,7 @@ function renderTraining(t) {
       <div class="exercise-body">
         <div class="drill-field"><div class="drill-field-label">How to do it</div><div class="drill-field-value">${e.how_to}</div></div>
         ${e.hockey_benefit ? `<div class="highlight-blue" style="margin-top:8px"><div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:4px">Hockey benefit</div><div style="font-size:13px">${e.hockey_benefit}</div></div>` : ''}
+        ${videoEmbed(e.name)}
       </div>
     </div>`;
   });
@@ -630,6 +635,13 @@ function switchTab(tab) {
       el.style.height = 'calc(100vh - 132px)';
     });
   }
+}
+
+// ── VIDEO EMBEDS ──
+function videoEmbed(name) {
+  var id = window.coachd && window.coachd.getVideo ? window.coachd.getVideo(name) : null;
+  if (!id) return '';
+  return `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe></div>`;
 }
 
 // ── EXPANDABLE CARDS ──
