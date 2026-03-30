@@ -74,7 +74,7 @@ var COACHD_VIDEO_LIBRARY = {
   'pivot':                      'hYwW6-tM20s',
   'tight turns':                'o7TrmZqMNLE',
   'tight turn':                 'o7TrmZqMNLE',
-  'mohawk turns':               null,  // search: "hockey mohawk turn skating"
+  'mohawk turns':               '01vNhb8N6o8',
   'power skating':              '6vwJY204dMM',
 
   'puck protection':            'aS3K2ElKo7g',
