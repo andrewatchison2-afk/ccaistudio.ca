@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook Post — Coachd Hockey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0D1E35;
+      font-family: 'DM Sans', sans-serif;
+      color: #F0F6FF;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .page-title {
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 4px;
+      color: #8BAFD4;
+      margin-bottom: 8px;
+    }
+    .page-sub {
+      text-align: center;
+      font-size: 14px;
+      color: #4A7BA8;
+      margin-bottom: 40px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── Facebook Post mockup ── */
+    .fb-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+    }
+    .fb-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .fb-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #081322;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .fb-avatar svg { width: 44px; height: 44px; }
+    .fb-page-info { flex: 1; }
+    .fb-page-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: #050505;
+      display: block;
+    }
+    .fb-meta {
+      font-size: 12px;
+      color: #65676B;
+    }
+    .fb-more {
+      color: #65676B;
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .fb-copy {
+      padding: 0 16px 12px;
+      font-size: 15px;
+      color: #050505;
+      line-height: 1.5;
+    }
+    .fb-copy p { margin-bottom: 10px; }
+    .fb-copy .hashtags { color: #216FDB; }
+    .fb-image {
+      width: 100%;
+      display: block;
+    }
+    .fb-image img, .fb-image svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .fb-reactions {
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #E4E6EB;
+      font-size: 13px;
+      color: #65676B;
+    }
+    .fb-reaction-icons { display: flex; gap: 4px; align-items: center; }
+    .fb-action-bar {
+      display: flex;
+      padding: 2px 8px;
+      border-top: 1px solid #E4E6EB;
+    }
+    .fb-action {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #65676B;
+      cursor: pointer;
+      user-select: none;
+    }
+    .fb-action:hover { background: #F2F2F2; }
+
+    /* ── Post copy panel ── */
+    .copy-panel {
+      background: #081322;
+      border: 1px solid #132843;
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+    .copy-panel h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: #E63946;
+      margin-bottom: 16px;
+    }
+    .copy-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #D6E4F7;
+      white-space: pre-line;
+    }
+    .copy-text .hashtags { color: #4A90D9; }
+    .copy-btn {
+      margin-top: 20px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #132843;
+      border: 1px solid #264D78;
+      color: #8BAFD4;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover { background: #1C3A5C; color: #F0F6FF; }
+
+    /* ── Second post variant ── */
+    .variant-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 3px;
+      color: #4A7BA8;
+      text-align: center;
+    }
+
+    /* ── Image download hint ── */
+    .download-hint {
+      background: #040C1A;
+      border: 1px dashed #264D78;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 13px;
+      color: #4A7BA8;
+      text-align: center;
+    }
+    .download-hint a {
+      color: #E63946;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .download-hint a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <p class="page-title">FACEBOOK POST ASSETS</p>
+  <p class="page-sub">Ready-to-publish posts for Coachd Hockey · coachdhockey.ca</p>
+
+  <div class="container">
+
+    <!-- ─── POST 1 ─── -->
+    <div class="variant-label">POST VARIANT 1 — Main Promo</div>
+
+    <div class="fb-card">
+      <div class="fb-header">
+        <div class="fb-avatar">
+          <!-- Coachd logo puck -->
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="rgba(230,57,70,0.08)"/>
+            <circle cx="60" cy="60" r="46" fill="#081322" stroke="#E63946" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="38" fill="none" stroke="#132843" stroke-width="1"/>
+            <line x1="26" y1="60" x2="94" y2="60" stroke="#132843" stroke-width="0.8"/>
+            <text x="60" y="78" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#F0F6FF" text-anchor="middle" transform="skewX(-5)" letter-spacing="-2">C</text>
+            <path d="M 85 28 L 92 36" stroke="#E63946" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="fb-page-info">
+          <span class="fb-page-name">Coachd Hockey</span>
+          <span class="fb-meta">Sponsored · <span style="font-size:11px">🌐</span></span>
+        </div>
+        <span class="fb-more">···</span>
+      </div>
+
+      <div class="fb-copy">
+        <p>🏒 Is your kid putting in the work but not getting the support they need between practices?</p>
+        <p>We built <strong>Coachd</strong> for exactly that. It's an AI hockey coach that's available 24/7 — answering questions about game situations, drills, skating technique, tryout prep, mental game, and more. Like having a pro coach in your pocket.</p>
+        <p>✅ 7-day free trial<br>✅ Built for minor hockey families<br>✅ Only $19.99/month after that</p>
+        <p>Your player works hard. Make sure the support matches. 👇</p>
+        <p><strong>Start your free trial → coachdhockey.ca</strong></p>
+        <p class="hashtags">#MinorHockey #HockeyParents #HockeyFamilies #HockeyTraining #YouthHockey #HockeyLife #CoachHockey #Lethbridge #Alberta</p>
+      </div>
+
+      <div class="fb-image">
+        <img src="facebook-post-1.svg" alt="Coachd Hockey — AI Hockey Coaching for Minor Hockey Families" loading="lazy">
+      </div>
+
+      <div class="fb-reactions">
+        <div class="fb-reaction-icons">
+          <span>👍❤️🏒</span>
+          <span style="margin-left:6px">247 reactions</span>
+        </div>
+        <div>38 comments · 91 shares</div>
+      </div>
+
+      <div class="fb-action-bar">
+        <div class="fb-action">👍 Like</div>
+        <div class="fb-action">💬 Comment</div>
+        <div class="fb-action">↗ Share</div>
+      </div>
+    </div>
+
+    <!-- ─── Copy panel ─── -->
+    <div class="copy-panel">
+      <h2>📋 Post Copy — Variant 1</h2>
+      <div class="copy-text">🏒 Is your kid putting in the work but not getting the support they need between practices?
+
+We built Coachd for exactly that. It's an AI hockey coach that's available 24/7 — answering questions about game situations, drills, skating technique, tryout prep, mental game, and more. Like having a pro coach in your pocket.
+
+✅ 7-day free trial
+✅ Built for minor hockey families
+✅ Only $19.99/month after that
+
+Your player works hard. Make sure the support matches. 👇
+
+Start your free trial → coachdhockey.ca
+
+<span class="hashtags">#MinorHockey #HockeyParents #HockeyFamilies #HockeyTraining #YouthHockey #HockeyLife #CoachHockey #Lethbridge #Alberta</span></div>
+      <button class="copy-btn" onclick="copyPost1()">📋 Copy Post Text</button>
+    </div>
+
+    <!-- ─── POST 2 ─── -->
+    <div class="variant-label" style="margin-top:16px">POST VARIANT 2 — Tryout Season</div>
+
+    <div class="fb-card">
+      <div class="fb-header">
+        <div class="fb-avatar">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="rgba(230,57,70,0.08)"/>
+            <circle cx="60" cy="60" r="46" fill="#081322" stroke="#E63946" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="38" fill="none" stroke="#132843" stroke-width="1"/>
+            <line x1="26" y1="60" x2="94" y2="60" stroke="#132843" stroke-width="0.8"/>
+            <text x="60" y="78" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#F0F6FF" text-anchor="middle" transform="skewX(-5)" letter-spacing="-2">C</text>
+            <path d="M 85 28 L 92 36" stroke="#E63946" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="fb-page-info">
+          <span class="fb-page-name">Coachd Hockey</span>
+          <span class="fb-meta">Sponsored · <span style="font-size:11px">🌐</span></span>
+        </div>
+        <span class="fb-more">···</span>
+      </div>
+
+      <div class="fb-copy">
+        <p>⚡ Tryout season is coming. Is your player ready?</p>
+        <p>Coachd gives minor hockey players access to intelligent, personalized coaching advice — on-demand. Ask about positioning, edge work, reading the play, confidence under pressure. Get answers that actually make sense for your kid's level.</p>
+        <p>🎯 Prep smarter. Perform better. Make the team.</p>
+        <p>👉 Try it free for 7 days at <strong>coachdhockey.ca</strong></p>
+        <p class="hashtags">#HockeyTryouts #MinorHockey #HockeyDevelopment #MakeTheTeam #HockeyParents #YouthAthletes #HockeyCanada</p>
+      </div>
+
+      <div class="fb-image">
+        <img src="facebook-post-2.svg" alt="Coachd Hockey — Tryout Season Prep" loading="lazy">
+      </div>
+
+      <div class="fb-reactions">
+        <div class="fb-reaction-icons">
+          <span>👍❤️🔥</span>
+          <span style="margin-left:6px">183 reactions</span>
+        </div>
+        <div>24 comments · 67 shares</div>
+      </div>
+
+      <div class="fb-action-bar">
+        <div class="fb-action">👍 Like</div>
+        <div class="fb-action">💬 Comment</div>
+        <div class="fb-action">↗ Share</div>
+      </div>
+    </div>
+
+    <div class="copy-panel">
+      <h2>📋 Post Copy — Variant 2</h2>
+      <div class="copy-text">⚡ Tryout season is coming. Is your player ready?
+
+Coachd gives minor hockey players access to intelligent, personalized coaching advice — on-demand. Ask about positioning, edge work, reading the play, confidence under pressure. Get answers that actually make sense for your kid's level.
+
+🎯 Prep smarter. Perform better. Make the team.
+
+👉 Try it free for 7 days at coachdhockey.ca
+
+<span class="hashtags">#HockeyTryouts #MinorHockey #HockeyDevelopment #MakeTheTeam #HockeyParents #YouthAthletes #HockeyCanada</span></div>
+      <button class="copy-btn" onclick="copyPost2()">📋 Copy Post Text</button>
+    </div>
+
+    <!-- ─── POST 3 ─── -->
+    <div class="variant-label" style="margin-top:16px">POST VARIANT 3 — Social Proof / Story</div>
+
+    <div class="fb-card">
+      <div class="fb-header">
+        <div class="fb-avatar">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="rgba(230,57,70,0.08)"/>
+            <circle cx="60" cy="60" r="46" fill="#081322" stroke="#E63946" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="38" fill="none" stroke="#132843" stroke-width="1"/>
+            <line x1="26" y1="60" x2="94" y2="60" stroke="#132843" stroke-width="0.8"/>
+            <text x="60" y="78" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#F0F6FF" text-anchor="middle" transform="skewX(-5)" letter-spacing="-2">C</text>
+            <path d="M 85 28 L 92 36" stroke="#E63946" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="fb-page-info">
+          <span class="fb-page-name">Coachd Hockey</span>
+          <span class="fb-meta">Just now · <span style="font-size:11px">🌐</span></span>
+        </div>
+        <span class="fb-more">···</span>
+      </div>
+
+      <div class="fb-copy">
+        <p>💬 <em>"My son asked Coachd why he kept losing puck battles along the boards. Within seconds he had a breakdown of his footwork, body positioning, and two drills to try at his next skate."</em></p>
+        <p>That's the kind of coaching insight that used to cost $100/hour — or require knowing the right people.</p>
+        <p>Now any minor hockey family can access it for <strong>less than $20/month.</strong></p>
+        <p>🏒 <strong>coachdhockey.ca</strong> — Start free. Cancel anytime.</p>
+        <p class="hashtags">#HockeyDad #HockeyMom #MinorHockey #HockeyLife #HockeyFamilies #IceHockey #HockeyParents</p>
+      </div>
+
+      <div class="fb-image">
+        <img src="facebook-post-1.svg" alt="Coachd Hockey" loading="lazy">
+      </div>
+
+      <div class="fb-reactions">
+        <div class="fb-reaction-icons">
+          <span>❤️👍😮</span>
+          <span style="margin-left:6px">312 reactions</span>
+        </div>
+        <div>52 comments · 118 shares</div>
+      </div>
+
+      <div class="fb-action-bar">
+        <div class="fb-action">👍 Like</div>
+        <div class="fb-action">💬 Comment</div>
+        <div class="fb-action">↗ Share</div>
+      </div>
+    </div>
+
+    <div class="copy-panel">
+      <h2>📋 Post Copy — Variant 3</h2>
+      <div class="copy-text">💬 "My son asked Coachd why he kept losing puck battles along the boards. Within seconds he had a breakdown of his footwork, body positioning, and two drills to try at his next skate."
+
+That's the kind of coaching insight that used to cost $100/hour — or require knowing the right people.
+
+Now any minor hockey family can access it for less than $20/month.
+
+🏒 coachdhockey.ca — Start free. Cancel anytime.
+
+<span class="hashtags">#HockeyDad #HockeyMom #MinorHockey #HockeyLife #HockeyFamilies #IceHockey #HockeyParents</span></div>
+      <button class="copy-btn" onclick="copyPost3()">📋 Copy Post Text</button>
+    </div>
+
+    <!-- ─── Image download hint ─── -->
+    <div class="download-hint">
+      💡 <strong>To use the image:</strong> Right-click the post image above → "Save image as" to download the graphic. Upload it directly when creating your Facebook post. Recommended size: 1200×630px (already set).
+    </div>
+
+  </div><!-- /container -->
+
+  <script>
+    function copyPost1() {
+      const text = `🏒 Is your kid putting in the work but not getting the support they need between practices?
+
+We built Coachd for exactly that. It's an AI hockey coach that's available 24/7 — answering questions about game situations, drills, skating technique, tryout prep, mental game, and more. Like having a pro coach in your pocket.
+
+✅ 7-day free trial
+✅ Built for minor hockey families
+✅ Only $19.99/month after that
+
+Your player works hard. Make sure the support matches. 👇
+
+Start your free trial → coachdhockey.ca
+
+#MinorHockey #HockeyParents #HockeyFamilies #HockeyTraining #YouthHockey #HockeyLife #CoachHockey #Lethbridge #Alberta`;
+      navigator.clipboard.writeText(text).then(() => alert('Post text copied to clipboard!'));
+    }
+    function copyPost2() {
+      const text = `⚡ Tryout season is coming. Is your player ready?
+
+Coachd gives minor hockey players access to intelligent, personalized coaching advice — on-demand. Ask about positioning, edge work, reading the play, confidence under pressure. Get answers that actually make sense for your kid's level.
+
+🎯 Prep smarter. Perform better. Make the team.
+
+👉 Try it free for 7 days at coachdhockey.ca
+
+#HockeyTryouts #MinorHockey #HockeyDevelopment #MakeTheTeam #HockeyParents #YouthAthletes #HockeyCanada`;
+      navigator.clipboard.writeText(text).then(() => alert('Post text copied to clipboard!'));
+    }
+    function copyPost3() {
+      const text = `💬 "My son asked Coachd why he kept losing puck battles along the boards. Within seconds he had a breakdown of his footwork, body positioning, and two drills to try at his next skate."
+
+That's the kind of coaching insight that used to cost $100/hour — or require knowing the right people.
+
+Now any minor hockey family can access it for less than $20/month.
+
+🏒 coachdhockey.ca — Start free. Cancel anytime.
+
+#HockeyDad #HockeyMom #MinorHockey #HockeyLife #HockeyFamilies #IceHockey #HockeyParents`;
+      navigator.clipboard.writeText(text).then(() => alert('Post text copied to clipboard!'));
+    }
+  </script>
+</body>
+</html>

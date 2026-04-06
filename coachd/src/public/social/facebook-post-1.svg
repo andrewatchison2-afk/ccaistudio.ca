@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#040C1A;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#081322;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D1E35;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E63946;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF4D5B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F4A620;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD166;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="redGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softBlur">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <!-- Ice rink lines pattern -->
+    <pattern id="rinkLines" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="80" y2="80" stroke="#132843" stroke-width="0.5" opacity="0.4"/>
+      <line x1="80" y1="0" x2="0" y2="80" stroke="#132843" stroke-width="0.5" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <!-- Subtle grid pattern -->
+  <rect width="1200" height="630" fill="url(#rinkLines)" opacity="0.3"/>
+
+  <!-- Red glow blob left -->
+  <ellipse cx="200" cy="315" rx="300" ry="250" fill="#E63946" opacity="0.06" filter="url(#softBlur)"/>
+  <!-- Blue glow blob right -->
+  <ellipse cx="1000" cy="315" rx="280" ry="220" fill="#4A90D9" opacity="0.07" filter="url(#softBlur)"/>
+
+  <!-- Top red accent bar -->
+  <rect x="0" y="0" width="1200" height="5" fill="url(#redGrad)"/>
+
+  <!-- Left content area -->
+  <!-- Logo puck -->
+  <circle cx="90" cy="72" r="40" fill="#081322" stroke="#E63946" stroke-width="2"/>
+  <circle cx="90" cy="72" r="33" fill="none" stroke="#132843" stroke-width="1"/>
+  <line x1="60" y1="72" x2="120" y2="72" stroke="#132843" stroke-width="0.8"/>
+  <text x="90" y="89" font-family="Arial Black, sans-serif" font-size="44" font-weight="900" fill="#F0F6FF" text-anchor="middle" transform="skewX(-5)">C</text>
+  <line x1="112" y1="45" x2="118" y2="53" stroke="#E63946" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Brand name -->
+  <text x="142" y="62" font-family="Arial Black, Impact, sans-serif" font-size="30" font-weight="900" fill="#F0F6FF" letter-spacing="3">COACHD</text>
+  <text x="142" y="84" font-family="Arial, sans-serif" font-size="13" fill="#8BAFD4" letter-spacing="2">HOCKEY INTELLIGENCE</text>
+
+  <!-- Main headline -->
+  <text x="80" y="185" font-family="Arial Black, Impact, sans-serif" font-size="62" font-weight="900" fill="#F0F6FF" letter-spacing="1">YOUR KID DESERVES</text>
+  <text x="80" y="257" font-family="Arial Black, Impact, sans-serif" font-size="62" font-weight="900" fill="url(#redGrad)" letter-spacing="1">PRO-LEVEL COACHING.</text>
+  <text x="80" y="329" font-family="Arial Black, Impact, sans-serif" font-size="55" font-weight="900" fill="#F0F6FF" letter-spacing="1">24/7. ON YOUR PHONE.</text>
+
+  <!-- Divider line -->
+  <rect x="80" y="355" width="80" height="4" fill="url(#redGrad)" rx="2"/>
+
+  <!-- Body copy -->
+  <text x="80" y="395" font-family="Arial, sans-serif" font-size="20" fill="#8BAFD4">AI-powered hockey coaching for minor hockey families.</text>
+  <text x="80" y="422" font-family="Arial, sans-serif" font-size="20" fill="#8BAFD4">Get instant answers to game situations, practice drills,</text>
+  <text x="80" y="449" font-family="Arial, sans-serif" font-size="20" fill="#8BAFD4">position tips &amp; mental edge training — anytime.</text>
+
+  <!-- Feature pills -->
+  <!-- Pill 1 -->
+  <rect x="80" y="475" width="180" height="36" rx="18" fill="#132843" stroke="#264D78" stroke-width="1.5"/>
+  <text x="170" y="498" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#4A90D9" text-anchor="middle">⚡ Instant Answers</text>
+  <!-- Pill 2 -->
+  <rect x="272" y="475" width="168" height="36" rx="18" fill="#132843" stroke="#264D78" stroke-width="1.5"/>
+  <text x="356" y="498" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#3EBD6E" text-anchor="middle">✓ 7-Day Free Trial</text>
+  <!-- Pill 3 -->
+  <rect x="452" y="475" width="168" height="36" rx="18" fill="#132843" stroke="#264D78" stroke-width="1.5"/>
+  <text x="536" y="498" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#F4A620" text-anchor="middle">★ Built for Families</text>
+
+  <!-- CTA button -->
+  <rect x="80" y="534" width="290" height="58" rx="8" fill="url(#redGrad)" filter="url(#redGlow)"/>
+  <text x="225" y="570" font-family="Arial Black, Impact, sans-serif" font-size="20" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">START FREE TRIAL →</text>
+
+  <!-- URL below button -->
+  <text x="225" y="606" font-family="Arial, sans-serif" font-size="14" fill="#4A7BA8" text-anchor="middle">coachdhockey.ca</text>
+
+  <!-- Right side — rink/visual graphic -->
+  <!-- Ice rink oval -->
+  <ellipse cx="920" cy="315" rx="230" ry="260" fill="none" stroke="#1C3A5C" stroke-width="2" opacity="0.7"/>
+  <ellipse cx="920" cy="315" rx="200" ry="228" fill="#0D1E35" stroke="#132843" stroke-width="1" opacity="0.8"/>
+
+  <!-- Center circle -->
+  <circle cx="920" cy="315" r="70" fill="none" stroke="#1C3A5C" stroke-width="2"/>
+  <circle cx="920" cy="315" r="10" fill="#E63946" opacity="0.8"/>
+
+  <!-- Center red line -->
+  <line x1="720" y1="315" x2="1120" y2="315" stroke="#E63946" stroke-width="2.5" opacity="0.5"/>
+  <!-- Blue lines -->
+  <line x1="720" y1="210" x2="1120" y2="210" stroke="#4A90D9" stroke-width="1.5" opacity="0.4"/>
+  <line x1="720" y1="420" x2="1120" y2="420" stroke="#4A90D9" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Goal crease top -->
+  <path d="M 870 78 Q 920 120 970 78" fill="none" stroke="#4A90D9" stroke-width="1.5" opacity="0.5"/>
+  <rect x="890" y="58" width="60" height="20" rx="2" fill="none" stroke="#4A90D9" stroke-width="1.5" opacity="0.5"/>
+  <!-- Goal crease bottom -->
+  <path d="M 870 552 Q 920 510 970 552" fill="none" stroke="#4A90D9" stroke-width="1.5" opacity="0.5"/>
+  <rect x="890" y="552" width="60" height="20" rx="2" fill="none" stroke="#4A90D9" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Faceoff dots -->
+  <circle cx="820" cy="210" r="6" fill="#E63946" opacity="0.6"/>
+  <circle cx="1020" cy="210" r="6" fill="#E63946" opacity="0.6"/>
+  <circle cx="820" cy="420" r="6" fill="#E63946" opacity="0.6"/>
+  <circle cx="1020" cy="420" r="6" fill="#E63946" opacity="0.6"/>
+
+  <!-- Faceoff circles -->
+  <circle cx="820" cy="210" r="40" fill="none" stroke="#E63946" stroke-width="1.2" opacity="0.3"/>
+  <circle cx="1020" cy="210" r="40" fill="none" stroke="#E63946" stroke-width="1.2" opacity="0.3"/>
+  <circle cx="820" cy="420" r="40" fill="none" stroke="#E63946" stroke-width="1.2" opacity="0.3"/>
+  <circle cx="1020" cy="420" r="40" fill="none" stroke="#E63946" stroke-width="1.2" opacity="0.3"/>
+
+  <!-- Floating stat cards on the rink -->
+  <!-- Card 1: AI Answers -->
+  <rect x="840" y="248" width="160" height="75" rx="10" fill="#081322" stroke="#264D78" stroke-width="1.5"/>
+  <text x="920" y="274" font-family="Arial Black, sans-serif" font-size="26" font-weight="900" fill="#F4A620" text-anchor="middle">∞</text>
+  <text x="920" y="296" font-family="Arial, sans-serif" font-size="11" fill="#8BAFD4" text-anchor="middle">COACHING SESSIONS</text>
+  <text x="920" y="313" font-family="Arial, sans-serif" font-size="11" fill="#8BAFD4" text-anchor="middle">PER MONTH</text>
+
+  <!-- Glow dot for card 1 -->
+  <circle cx="855" cy="263" r="4" fill="#3EBD6E"/>
+
+  <!-- Price tag card -->
+  <rect x="758" y="148" width="145" height="60" rx="10" fill="#132843" stroke="#E63946" stroke-width="1.5"/>
+  <text x="830" y="172" font-family="Arial, sans-serif" font-size="11" fill="#8BAFD4" text-anchor="middle">ONLY</text>
+  <text x="830" y="197" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="#F0F6FF" text-anchor="middle">$19.99/mo</text>
+
+  <!-- "AI Coach" badge -->
+  <rect x="957" y="148" width="130" height="60" rx="10" fill="#132843" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="1022" y="172" font-family="Arial, sans-serif" font-size="10" fill="#4A90D9" text-anchor="middle">POWERED BY</text>
+  <text x="1022" y="196" font-family="Arial Black, sans-serif" font-size="18" font-weight="900" fill="#F0F6FF" text-anchor="middle">Claude AI</text>
+
+  <!-- Bottom right card -->
+  <rect x="840" y="415" width="160" height="60" rx="10" fill="#081322" stroke="#3EBD6E" stroke-width="1.5"/>
+  <text x="920" y="440" font-family="Arial, sans-serif" font-size="11" fill="#8BAFD4" text-anchor="middle">TRYOUTS · DRILLS · MENTAL</text>
+  <text x="920" y="460" font-family="Arial, sans-serif" font-size="11" fill="#3EBD6E" text-anchor="middle">GAME · NUTRITION · MORE</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="615" width="1200" height="15" fill="url(#bgGrad)"/>
+  <rect x="0" y="625" width="1200" height="5" fill="url(#redGrad)" opacity="0.6"/>
+</svg>
